@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4EAF8DBF19A212F30020CA43 /* Markingbird.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EAF8DBE19A212F30020CA43 /* Markingbird.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EAF8DD319A213340020CA43 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD219A213340020CA43 /* Markdown.swift */; };
+		4EAF8DD519A213470020CA43 /* SimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD419A213470020CA43 /* SimpleTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4EAF8DD619A213720020CA43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EAF8DB019A212F30020CA43 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4EAF8DB819A212F30020CA43;
+			remoteInfo = Markingbird;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4EAF8DB919A212F30020CA43 /* Markingbird.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Markingbird.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EAF8DBD19A212F30020CA43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EAF8DBE19A212F30020CA43 /* Markingbird.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Markingbird.h; sourceTree = "<group>"; };
+		4EAF8DC419A212F30020CA43 /* MarkingbirdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarkingbirdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EAF8DC719A212F30020CA43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EAF8DD219A213340020CA43 /* Markdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
+		4EAF8DD419A213470020CA43 /* SimpleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4EAF8DB519A212F30020CA43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EAF8DC119A212F30020CA43 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4EAF8DAF19A212F30020CA43 = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DBB19A212F30020CA43 /* Markingbird */,
+				4EAF8DC519A212F30020CA43 /* MarkingbirdTests */,
+				4EAF8DBA19A212F30020CA43 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4EAF8DBA19A212F30020CA43 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DB919A212F30020CA43 /* Markingbird.framework */,
+				4EAF8DC419A212F30020CA43 /* MarkingbirdTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4EAF8DBB19A212F30020CA43 /* Markingbird */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DD219A213340020CA43 /* Markdown.swift */,
+				4EAF8DBE19A212F30020CA43 /* Markingbird.h */,
+				4EAF8DBC19A212F30020CA43 /* Supporting Files */,
+			);
+			path = Markingbird;
+			sourceTree = "<group>";
+		};
+		4EAF8DBC19A212F30020CA43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DBD19A212F30020CA43 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4EAF8DC519A212F30020CA43 /* MarkingbirdTests */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DD419A213470020CA43 /* SimpleTests.swift */,
+				4EAF8DC619A212F30020CA43 /* Supporting Files */,
+			);
+			path = MarkingbirdTests;
+			sourceTree = "<group>";
+		};
+		4EAF8DC619A212F30020CA43 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4EAF8DC719A212F30020CA43 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4EAF8DB619A212F30020CA43 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EAF8DBF19A212F30020CA43 /* Markingbird.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4EAF8DB819A212F30020CA43 /* Markingbird */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EAF8DCC19A212F30020CA43 /* Build configuration list for PBXNativeTarget "Markingbird" */;
+			buildPhases = (
+				4EAF8DB419A212F30020CA43 /* Sources */,
+				4EAF8DB519A212F30020CA43 /* Frameworks */,
+				4EAF8DB619A212F30020CA43 /* Headers */,
+				4EAF8DB719A212F30020CA43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Markingbird;
+			productName = Markingbird;
+			productReference = 4EAF8DB919A212F30020CA43 /* Markingbird.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4EAF8DC319A212F30020CA43 /* MarkingbirdTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4EAF8DCF19A212F30020CA43 /* Build configuration list for PBXNativeTarget "MarkingbirdTests" */;
+			buildPhases = (
+				4EAF8DC019A212F30020CA43 /* Sources */,
+				4EAF8DC119A212F30020CA43 /* Frameworks */,
+				4EAF8DC219A212F30020CA43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4EAF8DD719A213720020CA43 /* PBXTargetDependency */,
+			);
+			name = MarkingbirdTests;
+			productName = MarkingbirdTests;
+			productReference = 4EAF8DC419A212F30020CA43 /* MarkingbirdTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4EAF8DB019A212F30020CA43 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Kristopher Johnson";
+				TargetAttributes = {
+					4EAF8DB819A212F30020CA43 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					4EAF8DC319A212F30020CA43 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+				};
+			};
+			buildConfigurationList = 4EAF8DB319A212F30020CA43 /* Build configuration list for PBXProject "Markingbird" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4EAF8DAF19A212F30020CA43;
+			productRefGroup = 4EAF8DBA19A212F30020CA43 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4EAF8DB819A212F30020CA43 /* Markingbird */,
+				4EAF8DC319A212F30020CA43 /* MarkingbirdTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4EAF8DB719A212F30020CA43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EAF8DC219A212F30020CA43 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4EAF8DB419A212F30020CA43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EAF8DD319A213340020CA43 /* Markdown.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EAF8DC019A212F30020CA43 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EAF8DD519A213470020CA43 /* SimpleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4EAF8DD719A213720020CA43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4EAF8DB819A212F30020CA43 /* Markingbird */;
+			targetProxy = 4EAF8DD619A213720020CA43 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4EAF8DCA19A212F30020CA43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4EAF8DCB19A212F30020CA43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4EAF8DCD19A212F30020CA43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Markingbird/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4EAF8DCE19A212F30020CA43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Markingbird/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4EAF8DD019A212F30020CA43 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MarkingbirdTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4EAF8DD119A212F30020CA43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MarkingbirdTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4EAF8DB319A212F30020CA43 /* Build configuration list for PBXProject "Markingbird" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EAF8DCA19A212F30020CA43 /* Debug */,
+				4EAF8DCB19A212F30020CA43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EAF8DCC19A212F30020CA43 /* Build configuration list for PBXNativeTarget "Markingbird" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EAF8DCD19A212F30020CA43 /* Debug */,
+				4EAF8DCE19A212F30020CA43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4EAF8DCF19A212F30020CA43 /* Build configuration list for PBXNativeTarget "MarkingbirdTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4EAF8DD019A212F30020CA43 /* Debug */,
+				4EAF8DD119A212F30020CA43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4EAF8DB019A212F30020CA43 /* Project object */;
+}

@@ -1,8 +1,65 @@
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control?
-#
-# Pods/
+CVS
+.#*
+
+.hg
+.hgignore
+
+.svn
+
+bin
+.bin
+Bin
+obj
+Debug
+Debug Dist
+Release
+Release Dist
+TestResults
+*.obj
+*.suo
+*.ncb
+*.aps
+*.user
+*.tli
+*.tlh
+*.idb
+*.pdb
+*.tlb
+*_i.h
+*_h.h
+*_i.c
+*_p.c
+*idl.h
+dlldata.c
+*ps.dll
+*ps.exp
+*ps.lib
+*.sdf
+*.opensdf
+ipch
+PrecompiledWeb
+
+build
+*.pbxuser
+*.perspectivev3
+.DS_Store
+xcuserdata
+*.sublime-project
+*.sublime-workspace
+
+.idea/workspace.xml
+.idea/tasks.xml
+
+*.old
+*.log
+*.out
+*.cache
+*.orig
+logs
+
+gen
+.metadata
+local.properties
+
+*~
 
