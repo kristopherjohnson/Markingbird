@@ -4,6 +4,8 @@ This library provides a [Markdown](http://daringfireball.net/projects/markdown/)
 
 The port currently passes all of the test cases in MarkdownSharp's `SimpleTests` test suite. However, it has not been extensively tested or used in production applications. If you find issues, please submit bug reports and fixes.
 
+__Note:__ This works in Xcode 6 beta 5, but does not yet work in Xcode 6 beta 6. In 6b6, there are a couple of compilation errors, and fixing those results in some linker errors. Will investigate.
+
 ## How To Use It
 
 The Xcode project packages the library as a Cocoa framework. However, as all the code is in the file `Markingbird/Markdown.swift`, the easiest way to use it is to simply copy that file into your own projects.
