@@ -718,7 +718,7 @@ public struct Markdown {
     }
     
     private static func getHashKey(s: String, isHtmlBlock: Bool) -> String {
-        var delim: Character = isHtmlBlock ? "H" : "E"
+        var delim = isHtmlBlock ? "H" : "E"
         return "\u{1A}" + delim + String(abs(s.hashValue)) + delim
     }
 
@@ -1953,15 +1953,10 @@ private struct MarkdownRegex {
     
     private func isMatch(input: String) -> Bool {
         let s = input as NSString
-        let firstMatchResult = regularExpresson.firstMatchInString(s,
+        let firstMatchRange = regularExpresson.rangeOfFirstMatchInString(s,
             options: NSMatchingOptions(0),
             range: NSMakeRange(0, s.length))
-        if let foundResult = firstMatchResult {
-            return !(NSNotFound == firstMatchResult.range.location)
-        }
-        else {
-            return false
-        }
+        return !(NSNotFound == firstMatchRange.location)
     }
     
     private static func isMatch(input: String, pattern: String) -> Bool {
