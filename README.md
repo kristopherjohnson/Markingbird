@@ -40,7 +40,6 @@ A single `Markdown` instance can be used multiple times. However, it is not safe
 - Port all of the unit tests from MarkdownSharp and ensure they  pass. (As of now, only the `SimpleTests` suite has been ported.)
 - Eliminate all uses of `!` to force-unwrap Optionals (use safer `if let`, `??` or pattern-matching instead)
 - Re-examine the ways that characters and substrings are processed (the current implementation is a mish-mash of `String` and `NSString` bridging)
-- Translate the C#-style documentation comments to [reStructuredText](http://en.wikipedia.org/wiki/ReST) markup format.
 - Create sample apps for OS X and iOS.
 
 ## Implementation Notes

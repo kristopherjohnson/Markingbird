@@ -27,7 +27,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /*
 
 Markdown.swift is based on MarkdownSharp, whose licenses and history are
-described in the following sections.
+enumerated in the following sections.
 
 */
 
@@ -117,47 +117,34 @@ import Foundation
 
 
 public struct MarkdownOptions {
-    /// <summary>
     /// when true, (most) bare plain URLs are auto-hyperlinked
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var autoHyperlink: Bool
     
-    /// <summary>
     /// when true, RETURN becomes a literal newline
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var autoNewlines: Bool
     
-    /// <summary>
     /// use ">" for HTML output, or " />" for XHTML output
-    /// </summary>
     public var emptyElementSuffix: String
     
-    /// <summary>
     /// when true, problematic URL characters like [, ], (, and so forth will be encoded
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var encodeProblemUrlCharacters: Bool
     
-    /// <summary>
     /// when false, email addresses will never be auto-linked
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var linkEmails: Bool
     
-    /// <summary>
     /// when true, bold and italic require non-word characters on either side
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var strictBoldItalic: Bool
 }
 
-/**
-    Markdown is a text-to-HTML conversion tool for web writers.
-    Markdown allows you to write using an easy-to-read, easy-to-write plain text format,
-    then convert it to structurally valid XHTML (or HTML).
-*/
+/// Markdown is a text-to-HTML conversion tool for web writers.
+///
+/// Markdown allows you to write using an easy-to-read, easy-to-write plain text format,
+/// then convert it to structurally valid XHTML (or HTML).
 public struct Markdown {
     // The MarkdownRegex, MarkdownRegexOptions, and MarkdownRegexMatch types
     // provide interfaces similar to .NET's Regex, RegexOptions, and Match.
@@ -166,12 +153,10 @@ public struct Markdown {
     private typealias Match = MarkdownRegexMatch
     private typealias MatchEvaluator = (Match) -> String
     
-    // MarkdownSharp version on which this implementation is based
+    /// MarkdownSharp version on which this implementation is based
     private let _version = "1.13"
     
-    /// <summary>
     /// Create a new Markdown instance and set the options from the MarkdownOptions object.
-    /// </summary>
     public init(options: MarkdownOptions? = nil) {
         if Markdown.staticsInitialized {
             if let options = options {
@@ -185,59 +170,47 @@ public struct Markdown {
         }
     }
     
-    /// <summary>
     /// use ">" for HTML output, or " />" for XHTML output
-    /// </summary>
     public var emptyElementSuffix: String {
         get        { return _emptyElementSuffix }
         set(value) { _emptyElementSuffix = value }
     }
     private var _emptyElementSuffix = " />"
     
-    /// <summary>
     /// when false, email addresses will never be auto-linked
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var linkEmails: Bool {
         get        { return _linkEmails }
         set(value) { _linkEmails = value }
     }
     private var _linkEmails = true
     
-    /// <summary>
     /// when true, bold and italic require non-word characters on either side
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var strictBoldItalic: Bool {
         get        { return _strictBoldItalic }
         set(value) { _strictBoldItalic = value }
     }
     private var _strictBoldItalic = false
     
-    /// <summary>
     /// when true, RETURN becomes a literal newline
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var autoNewLines: Bool {
         get        { return _autoNewlines }
         set(value) { _autoNewlines = value }
     }
     private var _autoNewlines = false
     
-    /// <summary>
     /// when true, (most) bare plain URLs are auto-hyperlinked
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var autoHyperlink: Bool {
         get        { return _autoHyperlink }
         set(value) { _autoHyperlink = value }
     }
     private var _autoHyperlink = false
     
-    /// <summary>
     /// when true, problematic URL characters like [, ], (, and so forth will be encoded
     /// WARNING: this is a significant deviation from the markdown spec
-    /// </summary>
     public var encodeProblemUrlCharacters: Bool {
         get        { return _encodeProblemUrlCharacters }
         set(value) { _encodeProblemUrlCharacters = value }
@@ -259,15 +232,11 @@ public struct Markdown {
         private var value: String
     }
     
-    /// <summary>
     /// maximum nested depth of [] and () supported by the transform; implementation detail
-    /// </summary>
     private static let _nestDepth = 6
     
-    /// <summary>
     /// Tabs are automatically converted to spaces as part of the transform
     /// this constant determines how "wide" those tabs become in spaces
-    /// </summary>
     private static let _tabWidth = 4
     
     private static let _markerUL = "[*+-]"
@@ -284,9 +253,9 @@ public struct Markdown {
     private var _listLevel: Int = 0
     private static let autoLinkPreventionMarker = "\u{1A}P" // temporarily replaces "://" where auto-linking shouldn't happen;
     
-    // Swift doesn't have static initializers, so our trick is to
-    // define this static property with an initializer, and use the
-    // property in init() to force initialization.
+    /// Swift doesn't have static initializers, so our trick is to
+    /// define this static property with an initializer, and use the
+    /// property in init() to force initialization.
     private static let staticsInitialized: Bool = {
         // Table of hash values for escaped characters:
         _escapeTable = Dictionary<String, String>()
@@ -313,25 +282,24 @@ public struct Markdown {
         return true
         }()
     
-    /// <summary>
     /// current version of MarkdownSharp;
     /// see http://code.google.com/p/markdownsharp/ for the latest code or to contribute
-    /// </summary>
     public var version: String {
         get { return _version }
     }
     
-    /// <summary>
     /// Transforms the provided Markdown-formatted text to HTML;
     /// see http://en.wikipedia.org/wiki/Markdown
-    /// </summary>
-    /// <remarks>
-    /// The order in which other subs are called here is
-    /// essential. Link and image substitutions need to happen before
-    /// EscapeSpecialChars(), so that any *'s or _'s in the a
-    /// and img tags get encoded.
-    /// </remarks>
+    ///
+    /// :param: text Markdown-format text to be transformed to HTML
+    ///
+    /// :returns: HTML-format text
     public mutating func transform(var text: String) -> String {
+        // The order in which other subs are called here is
+        // essential. Link and image substitutions need to happen before
+        // EscapeSpecialChars(), so that any *'s or _'s in the a
+        // and img tags get encoded.
+        
         if text.isEmpty { return "" }
         
         setup()
@@ -348,9 +316,7 @@ public struct Markdown {
         return text + "\n"
     }
     
-    /// <summary>
     /// Perform transformations that form block-level tags like paragraphs, headers, and list items.
-    /// </summary>
     private mutating func runBlockGamut(var text: String, unhash: Bool = true) -> String {
         text = doHeaders(text)
         text = doHorizontalRules(text)
@@ -369,9 +335,7 @@ public struct Markdown {
         return text
     }
     
-    /// <summary>
     /// Perform transformations that occur *within* block-level tags like paragraphs, headers, and list items.
-    /// </summary>
     private func runSpanGamut(var text: String) -> String {
         text = doCodeSpans(text)
         text = escapeSpecialCharsWithinTagAttributes(text)
@@ -401,10 +365,8 @@ public struct Markdown {
     
     private static let _htmlBlockHash = Regex("\u{1A}H\\d+H")
     
-    /// <summary>
     /// splits on two or more newlines, to form "paragraphs";
     /// each paragraph is then unhashed (if it is a hash and unhashing isn't turned off) or wrapped in HTML p tag
-    /// </summary>
     private func formParagraphs(text: String, unhash: Bool = true) -> String
     {
         // split on two or more newlines
@@ -462,10 +424,8 @@ public struct Markdown {
     
     private static var _nestedBracketsPattern = ""
     
-    /// <summary>
     /// Reusable pattern to match balanced [brackets]. See Friedl's
     /// "Mastering Regular Expressions", 2nd Ed., pp. 328-331.
-    /// </summary>
     private static func getNestedBracketsPattern() -> String {
         // in other words [this] and [this[also]] and [this[also[too]]]
         // up to _nestDepth
@@ -483,10 +443,8 @@ public struct Markdown {
 
     private static var _nestedParensPattern = ""
     
-    /// <summary>
     /// Reusable pattern to match balanced (parens). See Friedl's
     /// "Mastering Regular Expressions", 2nd Ed., pp. 328-331.
-    /// </summary>
     private static func getNestedParensPattern() -> String {
         // in other words (this) and (this(also)) and (this(also(too)))
         // up to _nestDepth
@@ -522,12 +480,9 @@ public struct Markdown {
         ]),
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// Strips link definitions from text, stores the URLs and titles in hash references.
-    /// </summary>
-    /// <remarks>
+    ///
     /// ^[id]: url "optional title"
-    /// </remarks>
     private mutating func stripLinkDefinitions(text: String) -> String
     {
         return Markdown._linkDef.replace(text) { self.linkEvaluator($0) }
@@ -549,13 +504,10 @@ public struct Markdown {
         return ""
     }
     
-    // compiling this monster regex results in worse performance. trust me.
     private static let _blocksHtml = Regex(Markdown.getBlockPattern(),
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
 
-    /// <summary>
     /// derived pretty much verbatim from PHP Markdown
-    /// </summary>
     private static func getBlockPattern() -> String {
     
         // Hashify HTML blocks:
@@ -702,9 +654,7 @@ public struct Markdown {
         return pattern
     }
 
-    /// <summary>
     /// replaces any block-level HTML blocks with hash entries
-    /// </summary>
     private mutating func hashHTMLBlocks(text: String) -> String {
         return Markdown._blocksHtml.replace(text) { self.htmlEvaluator($0) }
     }
@@ -732,13 +682,11 @@ public struct Markdown {
         Markdown.repeatString(")*>)", _nestDepth) + " # match <tag> and </tag>",
         options: RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// returns an array of HTML tokens comprising the input string. Each token is
     /// either a tag (possibly with nested, tags contained therein, such
     /// as &lt;a href="&lt;MTFoo&gt;"&gt;, or a run of text between tags. Each element of the
     /// array is a two-element array; the first is either 'tag' or 'text'; the second is
     /// the actual value.
-    /// </summary>
     private func tokenizeHTML(text: String) -> [Token] {
         var pos = 0
         var tagStart = 0
@@ -811,14 +759,11 @@ public struct Markdown {
         ]),
         options: RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// Turn Markdown link shortcuts into HTML anchor tags
-    /// </summary>
-    /// <remarks>
-    /// [link text](url "title")
-    /// [link text][id]
-    /// [id]
-    /// </remarks>
+    ///
+    /// - [link text](url "title")
+    /// - [link text][id]
+    /// - [id]
     private func doAnchors(var text: String) -> String {
         // First, handle reference-style links: [link text] [id]
         text = Markdown._anchorRef.replace(text) { self.anchorRefEvaluator($0) }
@@ -963,13 +908,10 @@ public struct Markdown {
         ]),
         options: RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline)
     
-    /// <summary>
     /// Turn Markdown image shortcuts into HTML img tags.
-    /// </summary>
-    /// <remarks>
-    /// ![alt text][id]
-    /// ![alt text](url "optional title")
-    /// </remarks>
+    ///
+    /// - ![alt text][id]
+    /// - ![alt text](url "optional title")
     private func doImages(var text: String) -> String {
         // First, handle reference-style labeled images: ![alt text][id]
         text = Markdown._imagesRef.replace(text) { self.imageReferenceEvaluator($0) }
@@ -1060,10 +1002,8 @@ public struct Markdown {
         ]),
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// Turn Markdown headers into HTML header tags
-    /// </summary>
-    /// <remarks>
+    ///
     /// Header 1
     /// ========
     ///
@@ -1071,11 +1011,14 @@ public struct Markdown {
     /// --------
     ///
     /// # Header 1
+    ///
     /// ## Header 2
+    ///
     /// ## Header 2 with closing hashes ##
+    ///
     /// ...
+    ///
     /// ###### Header 6
-    /// </remarks>
     private func doHeaders(var text: String) -> String {
         text = Markdown._headerSetext.replace(text) { self.setextHeaderEvaluator($0) }
         text = Markdown._headerAtx.replace(text) { self.atxHeaderEvaluator($0) }
@@ -1106,15 +1049,15 @@ public struct Markdown {
         ]),
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// Turn Markdown horizontal rules into HTML hr tags
-    /// </summary>
-    /// <remarks>
+    ///
     /// ***
+    ///
     /// * * *
+    ///
     /// ---
+    ///
     /// - - -
-    /// </remarks>
     private func doHorizontalRules(text: String) -> String {
         return Markdown._horizontalRules.replace(text, "<hr" + _emptyElementSuffix + "\n")
     }
@@ -1148,9 +1091,7 @@ public struct Markdown {
     private static let _listTopLevel = Regex("(?:(?<=\\n\\n)|\\A\\n?)" + _wholeList,
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
     /// Turn Markdown lists into HTML ul and ol and li tags
-    /// </summary>
     private mutating func doLists(var text: String, isInsideParagraphlessListItem: Bool = false) -> String {
         // We use a different prefix before nested lists than top-level lists.
         // See extended comment in _ProcessListItems().
@@ -1180,10 +1121,8 @@ public struct Markdown {
         }
     }
     
-    /// <summary>
     /// Process the contents of a single ordered or unordered list, splitting it
     /// into individual list items.
-    /// </summary>
     private mutating func processListItems(var list: String, marker: String, isInsideParagraphlessListItem: Bool = false) -> String {
         // The listLevel global keeps track of when we're inside a list.
         // Each time we enter a list, we increment it; when we leave a list,
@@ -1266,9 +1205,7 @@ public struct Markdown {
         ]),
         options: RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace)
     
-    /// <summary>
-    /// /// Turn Markdown 4-space indented code into HTML pre code blocks
-    /// </summary>
+    /// Turn Markdown 4-space indented code into HTML pre code blocks
     private func doCodeBlocks(var text: String) -> String {
         text = Markdown._codeBlock.replace(text) { self.codeBlockEvaluator($0) }
         return text
@@ -1294,9 +1231,7 @@ public struct Markdown {
         ]),
         options: RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline)
     
-    /// <summary>
     /// Turn Markdown `code spans` into HTML code tags
-    /// </summary>
     private func doCodeSpans(text: String) -> String {
         //    * You can use multiple backticks as the delimiters if you want to
         //        include literal backticks in the code span. So, this input:
@@ -1343,9 +1278,7 @@ public struct Markdown {
     private static let _strictItalic = Regex("(^|[\\W_])(?:(?!\\1)|(?=^))(\\*|_)(?=\\S)((?:(?!\\2).)*?\\S)\\2(?!\\2)(?=[\\W_]|$)",
         options: RegexOptions.Singleline)
     
-    /// <summary>
     /// Turn Markdown *italics* and **bold** into HTML strong and em tags
-    /// </summary>
     private func doItalicsAndBold(var text: String) -> String {
         // <strong> must go first, then <em>
         if (_strictBoldItalic) {
@@ -1359,9 +1292,7 @@ public struct Markdown {
         return text
     }
     
-    /// <summary>
     /// Turn markdown line breaks (two space at end of line) into HTML break tags
-    /// </summary>
     private func doHardBreaks(var text: String) -> String {
         if (_autoNewlines) {
             text = Regex.replace(text, pattern: "\\n", replacement: "<br\(_emptyElementSuffix)\n")
@@ -1385,9 +1316,7 @@ public struct Markdown {
         options: RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)
     
     
-    /// <summary>
     /// Turn Markdown > quoted blocks into HTML blockquote blocks
-    /// </summary>
     private mutating func doBlockQuotes(text: String) -> String {
         return Markdown._blockquote.replace(text) { self.blockQuoteEvaluator($0) }
     }
@@ -1485,12 +1414,9 @@ public struct Markdown {
         return "<\(proto)\(link)>\(tail)"
     }
 
-    /// <summary>
     /// Turn angle-delimited URLs into HTML anchor tags
-    /// </summary>
-    /// <remarks>
+    ///
     /// &lt;http://www.example.com&gt;
-    /// </remarks>
     private func doAutoLinks(var text: String) -> String {
     
         if (_autoHyperlink) {
@@ -1560,18 +1486,14 @@ public struct Markdown {
     private static let _outDent = Regex("^\\p{Z}{1,\(_tabWidth)}",
         options: RegexOptions.Multiline)
     
-    /// <summary>
     /// Remove one level of line-leading spaces
-    /// </summary>
     private func outdent(block: String) -> String {
         return Markdown._outDent.replace(block, "")
     }
     
-    /// <summary>
     /// encodes email address randomly
     /// roughly 10% raw, 45% hex, 45% dec
     /// note that @ is always encoded and : never is
-    /// </summary>
     private func encodeEmailAddress(addr: String) -> String {
         var sb = ""
         let colon: UInt8 = 58 // ':'
@@ -1592,9 +1514,7 @@ public struct Markdown {
 
     private static let _codeEncoder = Regex("&|<|>|\\\\|\\*|_|\\{|\\}|\\[|\\]")
     
-    /// <summary>
     /// Encode/escape certain Markdown characters inside code blocks and spans where they are literals
-    /// </summary>
     private func encodeCode(code: String) -> String {
         return Markdown._codeEncoder.replace(code) { self.encodeCodeEvaluator($0) }
     }
@@ -1621,9 +1541,7 @@ public struct Markdown {
     private static let _amps = Regex("&(?!((#[0-9]+)|(#[xX][a-fA-F0-9]+)|([a-zA-Z][a-zA-Z0-9]*));)")
     private static let _angles = Regex("<(?![A-Za-z/?\\$!])")
     
-    /// <summary>
     /// Encode any ampersands (that aren't part of an HTML entity) and left or right angle brackets
-    /// </summary>
     private func encodeAmpsAndAngles(var s: String) -> String {
         s = Markdown._amps.replace(s, "&amp;")
         s = Markdown._angles.replace(s, "&lt;")
@@ -1632,9 +1550,7 @@ public struct Markdown {
     
     private static var _backslashEscapes: Regex!
     
-    /// <summary>
     /// Encodes any escaped characters such as \`, \*, \[ etc
-    /// </summary>
     private func escapeBackslashes(s: String) -> String {
         return Markdown._backslashEscapes.replace(s) { self.escapeBackslashesEvaluator($0) }
     }
@@ -1644,9 +1560,7 @@ public struct Markdown {
     
     private static let _unescapes = Regex("\u{1A}E\\d+E")
     
-    /// <summary>
     /// swap back in all the special characters we've hidden
-    /// </summary>
     private func unescape(s: String) -> String {
         return Markdown._unescapes.replace(s) { self.unescapeEvaluator($0) }
     }
@@ -1654,16 +1568,12 @@ public struct Markdown {
         return Markdown._invertedEscapeTable[match.value]!
     }
     
-    /// <summary>
     /// this is to emulate what's evailable in PHP
-    /// </summary>
     private static func repeatString(text: String, _ count: Int) -> String {
         return reduce(Array(count: count, repeatedValue: text), "", +)
     }
 
-    /// <summary>
     /// escapes Bold [ * ] and Italic [ _ ] characters
-    /// </summary>
     private func escapeBoldItalic(var s: String) -> String {
         var str = s as NSString
         str = str.stringByReplacingOccurrencesOfString("*",
@@ -1685,9 +1595,7 @@ public struct Markdown {
         ":"
     ]
     
-    /// <summary>
     /// hex-encodes some unusual "problem" chars in URLs to avoid URL detection problems
-    /// </summary>
     private func encodeProblemUrlChars(url: String) -> String {
         // TODO: implement this. For now, ignore because _encodeProblemUrlCharacters
         // is a nonstandard Markdown extension
@@ -1719,13 +1627,11 @@ public struct Markdown {
         */
     }
 
-    /// <summary>
     /// Within tags -- meaning between &lt; and &gt; -- encode [\ ` * _] so they
     /// don't conflict with their use in Markdown for code, italics and strong.
     /// We're replacing each such character with its corresponding hash
     /// value; this is likely overkill, but it should prevent us from colliding
     /// with the escape values by accident.
-    /// </summary>
     private func escapeSpecialCharsWithinTagAttributes(text: String) -> String {
         let tokens = tokenizeHTML(text)
         
@@ -1756,12 +1662,10 @@ public struct Markdown {
         return sb
     }
 
-    /// <summary>
     /// convert all tabs to _tabWidth spaces;
     /// standardizes line endings from DOS (CR LF) or Mac (CR) to UNIX (LF);
     /// makes sure text ends with a couple of newlines;
     /// removes any blank lines (only spaces) in the text
-    /// </summary>
     private func normalize(text: String) -> String {
         var output = ""
         var line = ""
@@ -1846,13 +1750,11 @@ public struct Markdown {
     }
 }
 
-/**
-    Private wrapper for NSRegularExpression that provides interface
-    similar to that of .NET's Regex class.
-
-    This is intended only for use by the Markdown parser. It is not
-    a general-purpose regex utility.
-*/
+/// Private wrapper for NSRegularExpression that provides interface
+/// similar to that of .NET's Regex class.
+///
+/// This is intended only for use by the Markdown parser. It is not
+/// a general-purpose regex utility.
 private struct MarkdownRegex {
     private let regularExpresson: NSRegularExpression!
     
@@ -1999,9 +1901,7 @@ private struct MarkdownRegex {
     }
 }
 
-/**
-    Provides interface similar to that of .NET's Match class for an NSTextCheckingResult
-*/
+/// Provides interface similar to that of .NET's Match class for an NSTextCheckingResult
 private struct MarkdownRegexMatch {
     let textCheckingResult: NSTextCheckingResult
     let string: NSString
@@ -2032,44 +1932,32 @@ private struct MarkdownRegexMatch {
     }
 }
 
-/**
-    Provides .NET-style synonyms for NSRegularExpressionOptions values
-
-    - Multiline
-    - IgnorePatternWhitespace
-    - Singleline
-    - IgnoreCase
-    - None
-
-    Note: NSRegularExpressionOptions does not provide equivalents to
-    these .NET RegexOptions values used in the original C# source:
-
-    - Compile
-    - ExplicitCapture
-*/
+/// Defines .NET-style synonyms for NSRegularExpressionOptions values
+/// 
+/// - Multiline
+/// - IgnorePatternWhitespace
+/// - Singleline
+/// - IgnoreCase
+/// - None
+///
+/// Note: NSRegularExpressionOptions does not provide equivalents to
+/// these .NET RegexOptions values used in the original C# source:
+///
+/// - Compile
+/// - ExplicitCapture
 private struct MarkdownRegexOptions {
-    /**
-        Allow ^ and $ to match the start and end of lines.
-    */
+    /// Allow ^ and $ to match the start and end of lines.
     private static let Multiline = NSRegularExpressionOptions.AnchorsMatchLines
     
-    /**
-        Ignore whitespace and #-prefixed comments in the pattern.
-    */
+    /// Ignore whitespace and #-prefixed comments in the pattern.
     private static let IgnorePatternWhitespace = NSRegularExpressionOptions.AllowCommentsAndWhitespace
     
-    /**
-        Allow . to match any character, including line separators.
-    */
+    /// Allow . to match any character, including line separators.
     private static let Singleline = NSRegularExpressionOptions.DotMatchesLineSeparators
     
-    /**
-        Match letters in the pattern independent of case.
-    */
+    /// Match letters in the pattern independent of case.
     private static let IgnoreCase = NSRegularExpressionOptions.CaseInsensitive
     
-    /**
-        Default options
-    */
+    /// Default options
     private static let None = NSRegularExpressionOptions(0)
 }
