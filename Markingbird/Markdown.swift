@@ -119,26 +119,28 @@ import Foundation
 public struct MarkdownOptions {
     /// when true, (most) bare plain URLs are auto-hyperlinked
     /// WARNING: this is a significant deviation from the markdown spec
-    public var autoHyperlink: Bool
+    public var autoHyperlink: Bool = false
     
     /// when true, RETURN becomes a literal newline
     /// WARNING: this is a significant deviation from the markdown spec
-    public var autoNewlines: Bool
+    public var autoNewlines: Bool = false
     
     /// use ">" for HTML output, or " />" for XHTML output
-    public var emptyElementSuffix: String
+    public var emptyElementSuffix: String = " />"
     
     /// when true, problematic URL characters like [, ], (, and so forth will be encoded
     /// WARNING: this is a significant deviation from the markdown spec
-    public var encodeProblemUrlCharacters: Bool
+    public var encodeProblemUrlCharacters: Bool = false
     
     /// when false, email addresses will never be auto-linked
     /// WARNING: this is a significant deviation from the markdown spec
-    public var linkEmails: Bool
+    public var linkEmails: Bool = true
     
     /// when true, bold and italic require non-word characters on either side
     /// WARNING: this is a significant deviation from the markdown spec
-    public var strictBoldItalic: Bool
+    public var strictBoldItalic: Bool = false
+    
+    public init() {}
 }
 
 /// Markdown is a text-to-HTML conversion tool for web writers.
@@ -1360,9 +1362,9 @@ public struct Markdown {
     }
     
     private static let _charInsideUrl = "[-A-Z0-9+&@#/%?=~_|\\[\\]\\(\\)!:,\\.;\u{1a}]"
-    private static let _charEndingUrl = "[-A-Z0-9+&@#/%=~_|\\\\[\\\\])]"
+    private static let _charEndingUrl = "[-A-Z0-9+&@#/%=~_|\\[\\])]"
     
-    private static let _autolinkBare = Regex("(<|=\")?\\b(https?|ftp)(://\(_charInsideUrl)*\(_charEndingUrl))(?=$|\\\\W)",
+    private static let _autolinkBare = Regex("(<|=\")?\\b(https?|ftp)(://\(_charInsideUrl)*\(_charEndingUrl))(?=$|\\W)",
         options: RegexOptions.IgnoreCase)
     
     private static let _endCharRegex = Regex(_charEndingUrl,
@@ -1583,40 +1585,28 @@ public struct Markdown {
         return str
     }
     
-    private static let _problemUrlChars: [Character] = [
-        "\"",
-        "'",
-        "*",
-        "(",
-        ")",
-        "[",
-        "]",
-        "$",
-        ":"
-    ]
+    private static let _problemUrlChars = NSCharacterSet(charactersInString: "\"'*()[]$:")
     
     /// hex-encodes some unusual "problem" chars in URLs to avoid URL detection problems
     private func encodeProblemUrlChars(url: String) -> String {
-        // TODO: implement this. For now, ignore because _encodeProblemUrlCharacters
-        // is a nonstandard Markdown extension
-        return url
-        
-        /*
         if (!_encodeProblemUrlCharacters) { return url }
         
         var sb = ""
         var encode = false
-
+        
         let str = url as NSString
         for i in 0..<str.length {
             let c = str.characterAtIndex(i)
-            encode = Array.IndexOf(_problemUrlChars, c) != -1
-            if (encode && c == ':' && i < url.Length - 1) {
-                encode = !(url[i + 1] == '/') && !(url[i + 1] >= '0' && url[i + 1] <= '9')
+            encode = Markdown._problemUrlChars.characterIsMember(c)
+            if (encode && c == U16_COLON && i < str.length - 1) {
+                encode = !(str.characterAtIndex(i + 1) == U16_SLASH) &&
+                    !(str.characterAtIndex(i + 1) >= U16_ZERO
+                        && str.characterAtIndex(i + 1) <= U16_NINE)
             }
             
             if (encode) {
-                sb += "%" + NSString(format:"%2x", (UInt)c))
+                sb += "%"
+                sb += NSString(format:"%2x", UInt(c))
             }
             else {
                 sb += String(count: 1, repeatedValue: UnicodeScalar(c))
@@ -1624,7 +1614,6 @@ public struct Markdown {
         }
 
         return sb
-        */
     }
 
     /// Within tags -- meaning between &lt; and &gt; -- encode [\ ` * _] so they
@@ -1675,33 +1664,30 @@ public struct Markdown {
         for i in 0..<str.length {
             let c = str.characterAtIndex(i)
             switch (c) {
-            case 10: // '\n'
+            case U16_NEWLINE:
                 if (valid) { output += line }
                 output += "\n"
                 line = ""
                 valid = false
-                break
-            case 13: // '\r'
+            case U16_RETURN:
                 if (i < str.length - 1) && (str.characterAtIndex(i + 1) != 10) {
                     if (valid) { output += line }
                     output += "\n"
                     line = ""
                     valid = false
                 }
-                break
-            case 9: // '\t'
+            case U16_TAB:
                 let width = Markdown._tabWidth - countElements(line) % Markdown._tabWidth
                 for k in 0..<width {
                     line += " "
                 }
-                break
             case 0x1A:
                 break
             default:
-                if !valid && c != 32 /* ' ' */ {
+                if !valid && c != U16_SPACE /* ' ' */ {
                     valid = true
                 }
-                line += String(count: 1, repeatedValue: UnicodeScalar(UInt32(c)))
+                line += String(count: 1, repeatedValue: UnicodeScalar(c))
                 break
             }
         }
@@ -1748,6 +1734,29 @@ public struct Markdown {
             return true
         }
     }
+    
+    /// Convert UnicodeScalar to a 16-bit unichar value
+    private static func unicharForUnicodeScalar(unicodeScalar: UnicodeScalar) -> unichar {
+        let u32 = UInt32(unicodeScalar)
+        if u32 <= UInt32(UINT16_MAX) {
+            return unichar(u32)
+        }
+        else {
+            assert(false, "value must be representable in 16 bits")
+            return 0
+        }
+    }
+    
+    // unichar constants
+    // (Unfortunate that Swift doesn't provide easy single-character literals)
+    private let U16_COLON   = Markdown.unicharForUnicodeScalar(":"  as UnicodeScalar)
+    private let U16_SLASH   = Markdown.unicharForUnicodeScalar("/"  as UnicodeScalar)
+    private let U16_ZERO    = Markdown.unicharForUnicodeScalar("0"  as UnicodeScalar)
+    private let U16_NINE    = Markdown.unicharForUnicodeScalar("9"  as UnicodeScalar)
+    private let U16_NEWLINE = Markdown.unicharForUnicodeScalar("\n" as UnicodeScalar)
+    private let U16_RETURN  = Markdown.unicharForUnicodeScalar("\r" as UnicodeScalar)
+    private let U16_TAB     = Markdown.unicharForUnicodeScalar("\t" as UnicodeScalar)
+    private let U16_SPACE   = Markdown.unicharForUnicodeScalar(" "  as UnicodeScalar)
 }
 
 /// Private wrapper for NSRegularExpression that provides interface
@@ -1758,7 +1767,18 @@ public struct Markdown {
 private struct MarkdownRegex {
     private let regularExpresson: NSRegularExpression!
     
+#if MARKINGBIRD_DEBUG
+    // These are not used, but can be helpful when debugging
+    private var initPattern: NSString
+    private var initOptions: NSRegularExpressionOptions
+#endif
+    
     private init(_ pattern: String, options: NSRegularExpressionOptions = NSRegularExpressionOptions(0)) {
+#if MARKINGBIRD_DEBUG
+        self.initPattern = pattern
+        self.initOptions = options
+#endif
+        
         var error: NSError?
         let re = NSRegularExpression.regularExpressionWithPattern(pattern,
             options: options,
