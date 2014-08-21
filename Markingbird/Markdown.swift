@@ -385,8 +385,16 @@ public struct Markdown {
                     while keepGoing && sanityCheck > 0 {
                         keepGoing = false
                         grafs[i] = Markdown._htmlBlockHash.replace(grafs[i]) { match in
-                            keepGoing = true
-                            return self._htmlBlocks[match.value]!
+                            // TODO: investigate what the semantics of .NET's Regex.Replace() are.
+                            // Maybe it should not be calling this evaluator if it's not a
+                            // legitimate match of something in _htmlBlocks?
+                            if let value = self._htmlBlocks[match.value] {
+                                keepGoing = true
+                                return value
+                            }
+                            else {
+                                return grafs[i]
+                            }
                         }
                         sanityCheck--
                     }
@@ -1822,6 +1830,9 @@ private struct MarkdownRegex {
             options: options,
             range: range,
             usingBlock: { (result, flags, stop) -> Void in
+                if result.range.location == NSNotFound {
+                    return
+                }
                 let match = MarkdownRegexMatch(textCheckingResult: result, string: s)
                 let replacementText = evaluator(match)
                 let replacement = (result.range, replacementText)
@@ -1946,6 +1957,10 @@ private struct MarkdownRegexMatch {
     private func valueOfGroupAtIndex(idx: Int) -> NSString? {
         if 0 <= idx && idx < textCheckingResult.numberOfRanges {
             let groupRange = textCheckingResult.rangeAtIndex(idx)
+            if (groupRange.location == NSNotFound) {
+                return nil
+            }
+            assert(groupRange.location + groupRange.length <= string.length, "range must be contained within string")
             return string.substringWithRange(groupRange)
         }
         return nil

@@ -10,7 +10,8 @@ class MDTestTests: XCTestCase {
     /// and then compare the result with the corresponding .html file
     func testTests() {
         for test in getTests() {
-            XCTAssertEqual(test.actualContent, test.expectedContent,
+            println("Actual: \(test.actualName); Expected: \(test.expectedName)")
+            XCTAssertEqual(test.actualResult, test.expectedResult,
                 "Mismatch between '\(test.actualName)' and the transformed '\(test.expectedName)'")
         }
     }
@@ -18,21 +19,19 @@ class MDTestTests: XCTestCase {
     struct TestCaseData {
         var actualName: String
         var expectedName: String
-        var actualContent: String
-        var expectedContent: String
+        var actualResult: String
+        var expectedResult: String
         
-        init(actualName: String, expectedName: String, actualContent: String, expectedContent: String) {
+        init(actualName: String, expectedName: String, actualResult: String, expectedResult: String) {
             self.actualName = actualName
             self.expectedName = expectedName
-            self.actualContent = actualContent
-            self.expectedContent = expectedContent
+            self.actualResult = actualResult
+            self.expectedResult = expectedResult
         }
     }
     
     func getTests() -> [TestCaseData] {
         var tests = Array<TestCaseData>()
-        
-        var m = Markdown()
         
         let bundle = NSBundle(forClass: MDTestTests.self)
         let resourcePath = bundle.resourcePath!
@@ -47,26 +46,33 @@ class MDTestTests: XCTestCase {
         for object in folderContents! {
             if let filename = object as? String {
                 if filename.hasSuffix(".html") {
+                    // Load the expected result content
                     let expectedName = filename
                     let expectedPath = folderPath.stringByAppendingPathComponent(expectedName)
-                    let actualName = expectedName.stringByDeletingPathExtension.stringByAppendingPathExtension("text")!
-                    let actualPath = folderPath.stringByAppendingPathComponent(actualName)
-                    
                     let expectedContent = NSString(contentsOfFile: expectedPath,
                         encoding: NSUTF8StringEncoding,
                         error: &error)
                     XCTAssertNil(error)
                     
-                    let actualContent = m.transform(expectedContent)
+                    // Load the source content
+                    let actualName = expectedName.stringByDeletingPathExtension.stringByAppendingPathExtension("text")!
+                    let sourcePath = folderPath.stringByAppendingPathComponent(actualName)
+                    let sourceContent = NSString(contentsOfFile: sourcePath,
+                        encoding: NSUTF8StringEncoding,
+                        error: &error)
+                    XCTAssertNil(error)
                     
-                    let expectedNormalized = removeWhitespace(expectedContent)
-                    let actualNormalized = removeWhitespace(actualContent)
+                    // Transform the source into the actual result, and
+                    // normalize both the actual and expected results
+                    var m = Markdown()                    
+                    let actualResult = removeWhitespace(m.transform(sourceContent))
+                    let expectedResult = removeWhitespace(expectedContent)
                     
                     let testCaseData = TestCaseData(
                         actualName: actualName,
                         expectedName: expectedName,
-                        actualContent: actualNormalized,
-                        expectedContent: expectedNormalized)
+                        actualResult: actualResult,
+                        expectedResult: expectedResult)
                     tests.append(testCaseData)
                 }
             }
