@@ -89,11 +89,18 @@ class MDTestTests: XCTestCase {
     
         // remove empty newlines
         var error: NSError?
-        let newlineRegex = NSRegularExpression(pattern: "^\\n", options: NSRegularExpressionOptions.AnchorsMatchLines, error: &error);
+        let newlineRegex = NSRegularExpression(
+            pattern: "^\\n",
+            options: NSRegularExpressionOptions.AnchorsMatchLines,
+            error: &error)
+        XCTAssertNil(error)
         str = newlineRegex.stringByReplacingMatchesInString(str, options: NSMatchingOptions(0), range: NSMakeRange(0, str.length), withTemplate: "")
     
         // remove leading space at the start of lines
-        let leadingSpaceRegex = NSRegularExpression(pattern: "^\\s+", options: NSRegularExpressionOptions.AnchorsMatchLines, error: &error);
+        let leadingSpaceRegex = NSRegularExpression(
+            pattern: "^\\s+",
+            options: NSRegularExpressionOptions.AnchorsMatchLines,
+            error: &error);
         str = leadingSpaceRegex.stringByReplacingMatchesInString(str, options: NSMatchingOptions(0), range: NSMakeRange(0, str.length), withTemplate: "")
     
         // remove all newlines

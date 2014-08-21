@@ -2,7 +2,7 @@
 
 This library provides a [Markdown](http://daringfireball.net/projects/markdown/) processor written in [Swift](https://developer.apple.com/swift/) for OS X and iOS. It is a translation/port of the [MarkdownSharp](https://code.google.com/p/markdownsharp/) processor used by [Stack Overflow](http://blog.stackoverflow.com/2009/12/introducing-markdownsharp/).
 
-The port currently passes all of the test cases in MarkdownSharp's `SimpleTests` and `ConfigTest` test suites. However, it has not been extensively tested or used in production applications. If you find issues, please submit bug reports and fixes.
+The port currently passes all of the test cases in MarkdownSharp's `SimpleTests`, `ConfigTest`, and `MDTestTests` test suites. However, it has not been extensively tested or used in production applications. If you find issues, please submit bug reports and fixes.
 
 ## How To Use It
 
@@ -36,7 +36,6 @@ A single `Markdown` instance can be used multiple times. However, it is not safe
 
 ## To-Do
 
-- Port all of the unit tests from MarkdownSharp and ensure they  pass. (As of now, only the `SimpleTests` and `ConfigTest` suites have been ported.)
 - Eliminate all uses of `!` to force-unwrap Optionals (use safer `if let`, `??` or pattern-matching instead)
 - Re-examine the ways that characters and substrings are processed (the current implementation is a mish-mash of `String` and `NSString` bridging)
 - Create sample apps for OS X and iOS.
