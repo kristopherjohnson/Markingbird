@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E2A478D19A5EADD00B23DB6 /* testfiles in Resources */ = {isa = PBXBuildFile; fileRef = 4E2A478C19A5EADD00B23DB6 /* testfiles */; };
+		4E2A478F19A5EB6F00B23DB6 /* MDTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2A478E19A5EB6F00B23DB6 /* MDTestTests.swift */; };
 		4E3CBBA519A4A70400940D90 /* ConfigTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3CBBA419A4A70400940D90 /* ConfigTest.swift */; };
 		4EAF8DBF19A212F30020CA43 /* Markingbird.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EAF8DBE19A212F30020CA43 /* Markingbird.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EAF8DD319A213340020CA43 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD219A213340020CA43 /* Markdown.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E2A478C19A5EADD00B23DB6 /* testfiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = testfiles; sourceTree = "<group>"; };
+		4E2A478E19A5EB6F00B23DB6 /* MDTestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDTestTests.swift; sourceTree = "<group>"; };
 		4E3CBBA419A4A70400940D90 /* ConfigTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigTest.swift; sourceTree = "<group>"; };
 		4EAF8DB919A212F30020CA43 /* Markingbird.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Markingbird.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EAF8DBD19A212F30020CA43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,8 +96,10 @@
 			isa = PBXGroup;
 			children = (
 				4E3CBBA419A4A70400940D90 /* ConfigTest.swift */,
+				4E2A478E19A5EB6F00B23DB6 /* MDTestTests.swift */,
 				4EAF8DD419A213470020CA43 /* SimpleTests.swift */,
 				4EAF8DC619A212F30020CA43 /* Supporting Files */,
+				4E2A478C19A5EADD00B23DB6 /* testfiles */,
 			);
 			path = MarkingbirdTests;
 			sourceTree = "<group>";
@@ -203,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E2A478D19A5EADD00B23DB6 /* testfiles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E2A478F19A5EB6F00B23DB6 /* MDTestTests.swift in Sources */,
 				4EAF8DD519A213470020CA43 /* SimpleTests.swift in Sources */,
 				4E3CBBA519A4A70400940D90 /* ConfigTest.swift in Sources */,
 			);
