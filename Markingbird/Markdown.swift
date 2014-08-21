@@ -385,16 +385,11 @@ public struct Markdown {
                     while keepGoing && sanityCheck > 0 {
                         keepGoing = false
                         grafs[i] = Markdown._htmlBlockHash.replace(grafs[i]) { match in
-                            // TODO: investigate what the semantics of .NET's Regex.Replace() are.
-                            // Maybe it should not be calling this evaluator if it's not a
-                            // legitimate match of something in _htmlBlocks?
                             if let value = self._htmlBlocks[match.value] {
                                 keepGoing = true
                                 return value
                             }
-                            else {
-                                return grafs[i]
-                            }
+                            return grafs[i]
                         }
                         sanityCheck--
                     }
@@ -500,15 +495,13 @@ public struct Markdown {
     
     private mutating func linkEvaluator(match: Match) -> String
     {
-        let linkID = match.valueOfGroupAtIndex(1)!.lowercaseString
-        _urls[linkID] = encodeAmpsAndAngles(match.valueOfGroupAtIndex(2)!)
+        let linkID = match.valueOfGroupAtIndex(1)
+        _urls[linkID] = encodeAmpsAndAngles(match.valueOfGroupAtIndex(2))
         
         let group3Value = match.valueOfGroupAtIndex(3)
-        if let group3Value = group3Value {
-            if group3Value.length != 0 {
-                _titles[linkID] = group3Value.stringByReplacingOccurrencesOfString("\"",
-                    withString: "&quot")
-            }
+        if group3Value.length != 0 {
+            _titles[linkID] = group3Value.stringByReplacingOccurrencesOfString("\"",
+                withString: "&quot")
         }
         
         return ""
@@ -793,9 +786,9 @@ public struct Markdown {
     }
     
     private func anchorRefEvaluator(match: Match) -> String {
-        let wholeMatch = match.valueOfGroupAtIndex(1)!
-        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2)!)
-        var linkID = match.valueOfGroupAtIndex(3)!.lowercaseString
+        let wholeMatch = match.valueOfGroupAtIndex(1)
+        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2))
+        var linkID = match.valueOfGroupAtIndex(3).lowercaseString
         
         var result: String
         
@@ -825,8 +818,8 @@ public struct Markdown {
     }
     
     private func anchorRefShortcutEvaluator(match: Match) -> String {
-        let wholeMatch = match.valueOfGroupAtIndex(1)!
-        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2)!)
+        let wholeMatch = match.valueOfGroupAtIndex(1)
+        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2))
         let linkID = Regex.replace(linkText.lowercaseString,
             pattern: "\\p{Z}*\\n\\p{Z}*",
             replacement: " ")  // lower case and remove newlines / extra spaces
@@ -854,9 +847,9 @@ public struct Markdown {
     }
     
     private func anchorInlineEvaluator(match: Match) -> String {
-        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2)!)
-        var url = match.valueOfGroupAtIndex(3)!
-        let title = match.valueOfGroupAtIndex(6)
+        let linkText = saveFromAutoLinking(match.valueOfGroupAtIndex(2))
+        var url = match.valueOfGroupAtIndex(3)
+        var title = match.valueOfGroupAtIndex(6)
         
         var result: String
         
@@ -868,12 +861,10 @@ public struct Markdown {
         
         result = "<a href=\"\(url)\""
         
-        if var title: String = title {
-            if !title.isEmpty {
-                title = Markdown.attributeEncode(title)
-                title = escapeBoldItalic(title)
-                result += " title=\"\(title)\""
-            }
+        if title.length != 0 {
+            title = Markdown.attributeEncode(title)
+            title = escapeBoldItalic(title)
+            result += " title=\"\(title)\""
         }
         
         result += ">\(linkText)</a>"
@@ -943,9 +934,9 @@ public struct Markdown {
     }
     
     private func imageReferenceEvaluator(match: Match) -> String {
-        let wholeMatch = match.valueOfGroupAtIndex(1)!
-        let altText = match.valueOfGroupAtIndex(2)!
-        var linkID = match.valueOfGroupAtIndex(3)!.lowercaseString
+        let wholeMatch = match.valueOfGroupAtIndex(1)
+        let altText = match.valueOfGroupAtIndex(2)
+        var linkID = match.valueOfGroupAtIndex(3).lowercaseString
         
         // for shortcut links like ![this][].
         if linkID.isEmpty {
@@ -967,8 +958,8 @@ public struct Markdown {
     }
     
     private func imageInlineEvaluator(match: Match) -> String {
-        let alt = match.valueOfGroupAtIndex(2)!
-        var url = match.valueOfGroupAtIndex(3)!
+        let alt = match.valueOfGroupAtIndex(2)
+        var url = match.valueOfGroupAtIndex(3)
         let title = match.valueOfGroupAtIndex(6)
         
         if url.hasPrefix("<") && url.hasSuffix(">") {
@@ -1036,14 +1027,14 @@ public struct Markdown {
     }
     
     private func setextHeaderEvaluator(match: Match) -> String {
-        let header = match.valueOfGroupAtIndex(1)!
-        let level = match.valueOfGroupAtIndex(2)!.hasPrefix("=") ? 1 : 2
+        let header = match.valueOfGroupAtIndex(1)
+        let level = match.valueOfGroupAtIndex(2).hasPrefix("=") ? 1 : 2
         return "<h\(level)>\(runSpanGamut(header))</h\(level)>\n\n"
     }
     
     private func atxHeaderEvaluator(match: Match) -> String {
-        let header = match.valueOfGroupAtIndex(2)!
-        let level = match.valueOfGroupAtIndex(1)!.length
+        let header = match.valueOfGroupAtIndex(2)
+        let level = match.valueOfGroupAtIndex(1).length
         return "<h\(level)>\(runSpanGamut(header))</h\(level)>\n\n"
     }
     
@@ -1118,8 +1109,8 @@ public struct Markdown {
     
     private mutating func getListEvaluator(isInsideParagraphlessListItem: Bool = false) -> MatchEvaluator {
         return { match in
-            let list = match.valueOfGroupAtIndex(1)!
-            let listType = Regex.isMatch(match.valueOfGroupAtIndex(3)!, pattern: Markdown._markerUL) ? "ul" : "ol"
+            let list = match.valueOfGroupAtIndex(1)
+            let listType = Regex.isMatch(match.valueOfGroupAtIndex(3), pattern: Markdown._markerUL) ? "ul" : "ol"
             var result: String
         
             result = self.processListItems(list,
@@ -1172,7 +1163,7 @@ public struct Markdown {
         
         // has to be a closure, so subsequent invocations can share the bool
         let listItemEvaluator: MatchEvaluator = { match in
-            var item = match.valueOfGroupAtIndex(3)!
+            var item = match.valueOfGroupAtIndex(3)
             
             let endsWithDoubleNewline = item.hasSuffix("\n\n")
             let containsDoubleNewline = endsWithDoubleNewline || Markdown.doesString(item, containSubstring: "\n\n")
@@ -1222,7 +1213,7 @@ public struct Markdown {
     }
     
     private func codeBlockEvaluator(match: Match) -> String {
-        var codeBlock = match.valueOfGroupAtIndex(1)!
+        var codeBlock = match.valueOfGroupAtIndex(1)
     
         codeBlock = encodeCode(outdent(codeBlock))
         codeBlock = Markdown._newlinesLeadingTrailing.replace(codeBlock, "")
@@ -1269,7 +1260,7 @@ public struct Markdown {
     }
     
     private func codeSpanEvaluator(match: Match) -> String {
-        var span = match.valueOfGroupAtIndex(2)!
+        var span = match.valueOfGroupAtIndex(2)
         span = Regex.replace(span, pattern: "^\\p{Z}*", replacement: "") // leading whitespace
         span = Regex.replace(span, pattern: "\\p{Z}*$", replacement: "") // trailing whitespace
         span = encodeCode(span)
@@ -1332,7 +1323,7 @@ public struct Markdown {
     }
     
     private mutating func blockQuoteEvaluator(match: Match) -> String {
-        var bq = match.valueOfGroupAtIndex(1)!
+        var bq = match.valueOfGroupAtIndex(1)
         
         bq = Regex.replace(bq,
             pattern: "^\\p{Z}*>\\p{Z}?",
@@ -1363,7 +1354,7 @@ public struct Markdown {
     }
 
     private func blockQuoteEvaluator2(match: Match) -> String {
-        return Regex.replace(match.valueOfGroupAtIndex(1)!,
+        return Regex.replace(match.valueOfGroupAtIndex(1),
             pattern: "^  ",
             replacement: "",
             options: RegexOptions.Multiline)
@@ -1388,8 +1379,8 @@ public struct Markdown {
             return match.value
         }
         
-        let proto = match.valueOfGroupAtIndex(2)!
-        var link: NSString = match.valueOfGroupAtIndex(3)!
+        let proto = match.valueOfGroupAtIndex(2)
+        var link: NSString = match.valueOfGroupAtIndex(3)
         if !link.hasSuffix(")") {
             return "<\(proto)\(link)>"
         }
@@ -1460,12 +1451,12 @@ public struct Markdown {
     }
 
     private func hyperlinkEvaluator(match: Match) -> String {
-        let link = match.valueOfGroupAtIndex(1)!
+        let link = match.valueOfGroupAtIndex(1)
         return "<a href=\"\(escapeBoldItalic(encodeProblemUrlChars(link)))\">\(link)</a>"
     }
 
     private func emailEvaluator(match: Match) -> String {
-        var email = unescape(match.valueOfGroupAtIndex(1)!)
+        var email = unescape(match.valueOfGroupAtIndex(1))
         
         //
         //    Input: an email address, e.g. "foo@example.com"
@@ -1954,16 +1945,16 @@ private struct MarkdownRegexMatch {
         return textCheckingResult.range.length
     }
     
-    private func valueOfGroupAtIndex(idx: Int) -> NSString? {
+    private func valueOfGroupAtIndex(idx: Int) -> NSString {
         if 0 <= idx && idx < textCheckingResult.numberOfRanges {
             let groupRange = textCheckingResult.rangeAtIndex(idx)
             if (groupRange.location == NSNotFound) {
-                return nil
+                return ""
             }
             assert(groupRange.location + groupRange.length <= string.length, "range must be contained within string")
             return string.substringWithRange(groupRange)
         }
-        return nil
+        return ""
     }
 }
 

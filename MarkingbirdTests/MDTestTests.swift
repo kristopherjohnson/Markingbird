@@ -10,7 +10,6 @@ class MDTestTests: XCTestCase {
     /// and then compare the result with the corresponding .html file
     func testTests() {
         for test in getTests() {
-            println("Actual: \(test.actualName); Expected: \(test.expectedName)")
             XCTAssertEqual(test.actualResult, test.expectedResult,
                 "Mismatch between '\(test.actualName)' and the transformed '\(test.expectedName)'")
         }
