@@ -10,6 +10,17 @@ class MDTestTests: XCTestCase {
     /// and then compare the result with the corresponding .html file
     func testTests() {
         for test in getTests() {
+            
+            // If there is a difference, print it in a more readable way than
+            // XCTest does
+            switch firstDifferenceBetweenStrings(test.actualResult, test.expectedResult) {
+            case .NoDifference:
+                break;
+            case .DifferenceAtIndex(let index):
+                let prettyDiff = prettyFirstDifferenceBetweenStrings(test.actualResult, test.expectedResult)
+                println("\n====\n\(test.actualName): \(prettyDiff)\n====\n")
+            }
+            
             XCTAssertEqual(test.actualResult, test.expectedResult,
                 "Mismatch between '\(test.actualName)' and the transformed '\(test.expectedName)'")
         }

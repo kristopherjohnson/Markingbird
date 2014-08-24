@@ -384,12 +384,13 @@ public struct Markdown {
                     var keepGoing = true // as long as replacements where made, keep going
                     while keepGoing && sanityCheck > 0 {
                         keepGoing = false
-                        grafs[i] = Markdown._htmlBlockHash.replace(grafs[i]) { match in
-                            if let value = self._htmlBlocks[match.value] {
+                        let graf = grafs[i]
+                        grafs[i] = Markdown._htmlBlockHash.replace(graf) { match in
+                            if let replacementValue = self._htmlBlocks[match.value] {
                                 keepGoing = true
-                                return value
+                                return replacementValue
                             }
-                            return grafs[i]
+                            return graf
                         }
                         sanityCheck--
                     }
@@ -1825,8 +1826,9 @@ private struct MarkdownRegex {
                     return
                 }
                 let match = MarkdownRegexMatch(textCheckingResult: result, string: s)
+                let range = result.range
                 let replacementText = evaluator(match)
-                let replacement = (result.range, replacementText)
+                let replacement = (range, replacementText)
                 replacements.append(replacement)
         })
         
@@ -1928,24 +1930,24 @@ private struct MarkdownRegexMatch {
     let textCheckingResult: NSTextCheckingResult
     let string: NSString
     
-    private init(textCheckingResult: NSTextCheckingResult, string: NSString) {
+    init(textCheckingResult: NSTextCheckingResult, string: NSString) {
         self.textCheckingResult = textCheckingResult
         self.string = string
     }
     
-    private var value: NSString {
+    var value: NSString {
         return string.substringWithRange(textCheckingResult.range)
     }
     
-    private var index: Int {
+    var index: Int {
         return textCheckingResult.range.location
     }
     
-    private var length: Int {
+    var length: Int {
         return textCheckingResult.range.length
     }
     
-    private func valueOfGroupAtIndex(idx: Int) -> NSString {
+    func valueOfGroupAtIndex(idx: Int) -> NSString {
         if 0 <= idx && idx < textCheckingResult.numberOfRanges {
             let groupRange = textCheckingResult.rangeAtIndex(idx)
             if (groupRange.location == NSNotFound) {
@@ -1973,17 +1975,17 @@ private struct MarkdownRegexMatch {
 /// - ExplicitCapture
 private struct MarkdownRegexOptions {
     /// Allow ^ and $ to match the start and end of lines.
-    private static let Multiline = NSRegularExpressionOptions.AnchorsMatchLines
+    static let Multiline = NSRegularExpressionOptions.AnchorsMatchLines
     
     /// Ignore whitespace and #-prefixed comments in the pattern.
-    private static let IgnorePatternWhitespace = NSRegularExpressionOptions.AllowCommentsAndWhitespace
+    static let IgnorePatternWhitespace = NSRegularExpressionOptions.AllowCommentsAndWhitespace
     
     /// Allow . to match any character, including line separators.
-    private static let Singleline = NSRegularExpressionOptions.DotMatchesLineSeparators
+    static let Singleline = NSRegularExpressionOptions.DotMatchesLineSeparators
     
     /// Match letters in the pattern independent of case.
-    private static let IgnoreCase = NSRegularExpressionOptions.CaseInsensitive
+    static let IgnoreCase = NSRegularExpressionOptions.CaseInsensitive
     
     /// Default options
-    private static let None = NSRegularExpressionOptions(0)
+    static let None = NSRegularExpressionOptions(0)
 }

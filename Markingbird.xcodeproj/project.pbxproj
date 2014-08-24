@@ -13,6 +13,7 @@
 		4EAF8DBF19A212F30020CA43 /* Markingbird.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EAF8DBE19A212F30020CA43 /* Markingbird.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4EAF8DD319A213340020CA43 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD219A213340020CA43 /* Markdown.swift */; };
 		4EAF8DD519A213470020CA43 /* SimpleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD419A213470020CA43 /* SimpleTests.swift */; };
+		4EC0AF3519A90DAC0068A458 /* differences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0AF3419A90DAC0068A458 /* differences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4EAF8DC719A212F30020CA43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EAF8DD219A213340020CA43 /* Markdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		4EAF8DD419A213470020CA43 /* SimpleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTests.swift; sourceTree = "<group>"; };
+		4EC0AF3419A90DAC0068A458 /* differences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = differences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				4EAF8DD419A213470020CA43 /* SimpleTests.swift */,
 				4EAF8DC619A212F30020CA43 /* Supporting Files */,
 				4E2A478C19A5EADD00B23DB6 /* testfiles */,
+				4EC0AF3419A90DAC0068A458 /* differences.swift */,
 			);
 			path = MarkingbirdTests;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				4E2A478F19A5EB6F00B23DB6 /* MDTestTests.swift in Sources */,
 				4EAF8DD519A213470020CA43 /* SimpleTests.swift in Sources */,
+				4EC0AF3519A90DAC0068A458 /* differences.swift in Sources */,
 				4E3CBBA519A4A70400940D90 /* ConfigTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
