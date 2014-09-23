@@ -1780,7 +1780,7 @@ private struct MarkdownRegex {
 #endif
         
         var error: NSError?
-        let re = NSRegularExpression.regularExpressionWithPattern(pattern,
+        let re = NSRegularExpression(pattern: pattern,
             options: options,
             error: &error)
         
