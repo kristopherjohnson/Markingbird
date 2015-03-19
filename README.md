@@ -10,6 +10,7 @@ The Xcode project packages the library as a Cocoa framework. However, as all the
 
 Typically, an app obtains some Markdown-formatted text somehow (read from a file, entered by a user, etc.), creates a `Markdown` object, and then calls its `transform(String) -> String` method to generate HTML.
 
+```swift
     // If using Markingbird framework, import the module.
     // (If Markdown.swift is in your target, this is unneeded.)
     import Markingbird
@@ -31,6 +32,7 @@ Typically, an app obtains some Markdown-formatted text somehow (read from a file
     options.strictBoldItalic = true
     var fancyMarkdown = Markdown(options: options)
 	let fancyOutput = fancyMarkdown.transform(inputText)
+```
 
 A single `Markdown` instance can be used multiple times. However, it is not safe to use the `Markdown` class or its instances simultaneously from multiple threads, due to unsynchronized use of shared static data.
 
@@ -62,6 +64,7 @@ To ease translation from C# to Swift, the private types `MarkdownRegex`, `Markdo
 
 The implementation uses many complex regular expressions. The C# version declares these using _verbatim string literals_ that span multiple lines and eliminate the need to escape special characters. Unfortunately, Swift does not allow string literals to span multiple lines, and requires escaping of all special characters. To translate the multi-line regular expression strings to Swift in a faithful and readable way, the `String.join` method is used to concatenate an array of lines copied from the original C# source. For example:
 
+```c#
 	// Original C# source
     string attr = @"
     (?>				    # optional tag attributes
@@ -77,7 +80,9 @@ The implementation uses many complex regular expressions. The C# version declare
       )*
     )?
 	";
+```
 
+```swift
 	// Translated to Swift
     let attr = "\n".join([
         "(?>            # optional tag attributes",
@@ -93,6 +98,7 @@ The implementation uses many complex regular expressions. The C# version declare
         "  )*",
         ")?"
         ])
+```
 
 The following transformations were made to the C# verbatim string literals to make them legal Swift literals and to conform to `NSRegularExpression`'s regular expression syntax:
 
