@@ -38,6 +38,7 @@ A single `Markdown` instance can be used multiple times. However, it is not safe
 
 - Eliminate all uses of `!` to force-unwrap Optionals (use safer `if let`, `??` or pattern-matching instead)
 - Re-examine the ways that characters and substrings are processed (the current implementation is a mish-mash of `String` and `NSString` bridging)
+- Eliminate mutable class-level state and add whatever synchronization is necessary to make it safe to use Markingbird instances in different threads.
 - Create sample apps for OS X and iOS.
 
 ## Implementation Notes
