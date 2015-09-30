@@ -3,10 +3,10 @@ import Foundation
 
 /// Find first differing character between two strings
 ///
-/// :param: s1 First String
-/// :param: s2 Second String
+/// - parameter s1: First String
+/// - parameter s2: Second String
 ///
-/// :returns: .DifferenceAtIndex(i) or .NoDifference
+/// - returns: .DifferenceAtIndex(i) or .NoDifference
 public func firstDifferenceBetweenStrings(s1: NSString, s2: NSString) -> FirstDifferenceResult {
     let len1 = s1.length
     let len2 = s2.length
@@ -33,23 +33,23 @@ public func firstDifferenceBetweenStrings(s1: NSString, s2: NSString) -> FirstDi
 
 /// Create a formatted String representation of difference between strings
 ///
-/// :param: s1 First string
-/// :param: s2 Second string
+/// - parameter s1: First string
+/// - parameter s2: Second string
 ///
-/// :returns: a string, possibly containing significant whitespace and newlines
+/// - returns: a string, possibly containing significant whitespace and newlines
 public func prettyFirstDifferenceBetweenStrings(s1: NSString, s2: NSString) -> NSString {
-    let firstDifferenceResult = firstDifferenceBetweenStrings(s1, s2)
-    return prettyDescriptionOfFirstDifferenceResult(firstDifferenceResult, s1, s2)
+    let firstDifferenceResult = firstDifferenceBetweenStrings(s1, s2: s2)
+    return prettyDescriptionOfFirstDifferenceResult(firstDifferenceResult, s1: s1, s2: s2)
 }
 
 
 /// Create a formatted String representation of a FirstDifferenceResult for two strings
 ///
-/// :param: firstDifferenceResult FirstDifferenceResult
-/// :param: s1 First string used in generation of firstDifferenceResult
-/// :param: s2 Second string used in generation of firstDifferenceResult
+/// - parameter firstDifferenceResult: FirstDifferenceResult
+/// - parameter s1: First string used in generation of firstDifferenceResult
+/// - parameter s2: Second string used in generation of firstDifferenceResult
 ///
-/// :returns: a printable string, possibly containing significant whitespace and newlines
+/// - returns: a printable string, possibly containing significant whitespace and newlines
 public func prettyDescriptionOfFirstDifferenceResult(firstDifferenceResult: FirstDifferenceResult, s1: NSString, s2: NSString) -> NSString {
 
     func diffString(index: Int, s1: NSString, s2: NSString) -> NSString {
@@ -81,8 +81,8 @@ public func prettyDescriptionOfFirstDifferenceResult(firstDifferenceResult: Firs
         let windowIndex = max(index - windowPrefixLength, 0)
         let windowRange = NSMakeRange(windowIndex, windowLength)
 
-        let sub1 = windowSubstring(s1, windowRange)
-        let sub2 = windowSubstring(s2, windowRange)
+        let sub1 = windowSubstring(s1, range: windowRange)
+        let sub2 = windowSubstring(s2, range: windowRange)
 
         let markerPosition = min(windowSuffixLength, index) + (windowIndex > 0 ? 1 : 0)
 
@@ -94,7 +94,7 @@ public func prettyDescriptionOfFirstDifferenceResult(firstDifferenceResult: Firs
 
     switch firstDifferenceResult {
     case .NoDifference:                 return "No difference"
-    case .DifferenceAtIndex(let index): return diffString(index, s1, s2)
+    case .DifferenceAtIndex(let index): return diffString(index, s1: s1, s2: s2)
     }
 }
 
@@ -111,7 +111,7 @@ public enum FirstDifferenceResult {
     case DifferenceAtIndex(Int)
 }
 
-extension FirstDifferenceResult: Printable, DebugPrintable {
+extension FirstDifferenceResult: CustomStringConvertible, CustomDebugStringConvertible {
     /// Textual representation of a FirstDifferenceResult
     public var description: String {
         switch self {
