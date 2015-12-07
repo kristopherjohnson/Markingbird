@@ -1650,7 +1650,7 @@ public struct Markdown {
 
         return sb
     }
-
+    
     /// convert all tabs to _tabWidth spaces;
     /// standardizes line endings from DOS (CR LF) or Mac (CR) to UNIX (LF);
     /// makes sure text ends with a couple of newlines;
@@ -1659,42 +1659,42 @@ public struct Markdown {
         var output = ""
         var line = ""
         var valid = false
-
-        let str = text as NSString
-        for i in 0..<str.length {
-            let c = str.characterAtIndex(i)
+        
+        for i in text.startIndex..<text.endIndex {
+            let c = text[i]
             switch (c) {
-            case U16_NEWLINE:
+            case "\n":
                 if (valid) { output += line }
                 output += "\n"
                 line = ""
                 valid = false
-            case U16_RETURN:
-                if (i < str.length - 1) && (str.characterAtIndex(i + 1) != 10) {
-                    if (valid) { output += line }
-                    output += "\n"
-                    line = ""
-                    valid = false
-                }
-            case U16_TAB:
+            case "\r":
+                if (valid) { output += line }
+                output += "\n"
+                line = ""
+                valid = false
+            case "\r\n":
+                if (valid) { output += line }
+                output += "\n"
+                line = ""
+                valid = false
+            case "\t":
                 let width = Markdown._tabWidth - line.characters.count % Markdown._tabWidth
                 for _ in 0..<width {
                     line += " "
                 }
-            case 0x1A:
-                break
             default:
-                if !valid && c != U16_SPACE /* ' ' */ {
+                if !valid && c != " " /* ' ' */ {
                     valid = true
                 }
-                line += String(count: 1, repeatedValue: UnicodeScalar(c))
+                line += String(count: 1, repeatedValue: c)
                 break
             }
         }
-
+        
         if (valid) { output += line }
         output += "\n"
-
+        
         // add two newlines to the end before return
         return output + "\n\n"
     }
