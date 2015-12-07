@@ -1668,6 +1668,13 @@ public struct Markdown {
                 output += "\n"
                 line = ""
                 valid = false
+            case "\r":
+                if (i.advancedBy(1) < text.endIndex) && (text[i.advancedBy(1)] != "\n") {
+                    if (valid) { output += line }
+                    output += "\n"
+                    line = ""
+                    valid = false
+                }
             case "\t":
                 let width = Markdown._tabWidth - line.characters.count % Markdown._tabWidth
                 for _ in 0..<width {
