@@ -296,7 +296,7 @@ public struct Markdown {
     /// - parameter text: Markdown-format text to be transformed to HTML
     ///
     /// - returns: HTML-format text
-    public mutating func transform(var text: String) -> String {
+    public mutating func transform(text: String) -> String {
         // The order in which other subs are called here is
         // essential. Link and image substitutions need to happen before
         // EscapeSpecialChars(), so that any *'s or _'s in the a
@@ -306,7 +306,7 @@ public struct Markdown {
 
         setup()
 
-        text = normalize(text)
+        var text = normalize(text)
 
         text = hashHTMLBlocks(text)
         text = stripLinkDefinitions(text)
@@ -319,8 +319,8 @@ public struct Markdown {
     }
 
     /// Perform transformations that form block-level tags like paragraphs, headers, and list items.
-    private mutating func runBlockGamut(var text: String, unhash: Bool = true) -> String {
-        text = doHeaders(text)
+    private mutating func runBlockGamut(text: String, unhash: Bool = true) -> String {
+        var text = doHeaders(text)
         text = doHorizontalRules(text)
         text = doLists(text)
         text = doCodeBlocks(text)
@@ -338,8 +338,8 @@ public struct Markdown {
     }
 
     /// Perform transformations that occur *within* block-level tags like paragraphs, headers, and list items.
-    private func runSpanGamut(var text: String) -> String {
-        text = doCodeSpans(text)
+    private func runSpanGamut(text: String) -> String {
+        var text = doCodeSpans(text)
         text = escapeSpecialCharsWithinTagAttributes(text)
         text = escapeBackslashes(text)
 
@@ -392,7 +392,7 @@ public struct Markdown {
                             }
                             return graf
                         }
-                        sanityCheck--
+                        sanityCheck -= 1
                     }
                     /* if (keepGoing)
                     {
@@ -768,9 +768,9 @@ public struct Markdown {
     /// - [link text](url "title")
     /// - [link text][id]
     /// - [id]
-    private func doAnchors(var text: String) -> String {
+    private func doAnchors(text: String) -> String {
         // First, handle reference-style links: [link text] [id]
-        text = Markdown._anchorRef.replace(text) { self.anchorRefEvaluator($0) }
+        var text = Markdown._anchorRef.replace(text) { self.anchorRefEvaluator($0) }
 
         // Next, inline-style links: [link text](url "optional title") or [link text](url "optional title")
         text = Markdown._anchorInline.replace(text) { self.anchorInlineEvaluator($0) }
@@ -914,9 +914,9 @@ public struct Markdown {
     ///
     /// - ![alt text][id]
     /// - ![alt text](url "optional title")
-    private func doImages(var text: String) -> String {
+    private func doImages(text: String) -> String {
         // First, handle reference-style labeled images: ![alt text][id]
-        text = Markdown._imagesRef.replace(text) { self.imageReferenceEvaluator($0) }
+        var text = Markdown._imagesRef.replace(text) { self.imageReferenceEvaluator($0) }
 
         // Next, handle inline images:  ![alt text](url "optional title")
         // Don't forget: encode * and _
@@ -928,8 +928,8 @@ public struct Markdown {
     // This prevents the creation of horribly broken HTML when some syntax ambiguities
     // collide. It likely still doesn't do what the user meant, but at least we're not
     // outputting garbage.
-    private func escapeImageAltText(var s: String) -> String {
-        s = escapeBoldItalic(s)
+    private func escapeImageAltText(s: String) -> String {
+        var s = escapeBoldItalic(s)
         s = Regex.replace(s, pattern: "[\\[\\]()]") { Markdown._escapeTable[$0.value as String]! }
         return s
     }
@@ -969,9 +969,9 @@ public struct Markdown {
         return imageTag(url as String, altText: alt as String, title: title as String)
     }
 
-    private func imageTag(var url: String, var altText: String, title: String?) -> String {
-        altText = escapeImageAltText(Markdown.attributeEncode(altText))
-        url = encodeProblemUrlChars(url)
+    private func imageTag(url: String, altText: String, title: String?) -> String {
+        let altText = escapeImageAltText(Markdown.attributeEncode(altText))
+        var url = encodeProblemUrlChars(url)
         url = escapeBoldItalic(url)
         var result = "<img src=\"\(url)\" alt=\"\(altText)\""
         if var title = title {
@@ -1021,8 +1021,8 @@ public struct Markdown {
     /// ...
     ///
     /// ###### Header 6
-    private func doHeaders(var text: String) -> String {
-        text = Markdown._headerSetext.replace(text) { self.setextHeaderEvaluator($0) }
+    private func doHeaders(text: String) -> String {
+        var text = Markdown._headerSetext.replace(text) { self.setextHeaderEvaluator($0) }
         text = Markdown._headerAtx.replace(text) { self.atxHeaderEvaluator($0) }
         return text
     }
@@ -1094,9 +1094,10 @@ public struct Markdown {
         options: RegexOptions.Multiline.union(RegexOptions.IgnorePatternWhitespace))
 
     /// Turn Markdown lists into HTML ul and ol and li tags
-    private mutating func doLists(var text: String, isInsideParagraphlessListItem: Bool = false) -> String {
+    private mutating func doLists(text: String, isInsideParagraphlessListItem: Bool = false) -> String {
         // We use a different prefix before nested lists than top-level lists.
         // See extended comment in _ProcessListItems().
+        var text = text
         if _listLevel > 0 {
             let evaluator = getListEvaluator(isInsideParagraphlessListItem)
             text = Markdown._listNested.replace(text) { evaluator($0) }
@@ -1125,7 +1126,7 @@ public struct Markdown {
 
     /// Process the contents of a single ordered or unordered list, splitting it
     /// into individual list items.
-    private mutating func processListItems(var list: String, marker: String, isInsideParagraphlessListItem: Bool = false) -> String {
+    private mutating func processListItems(list: String, marker: String, isInsideParagraphlessListItem: Bool = false) -> String {
         // The listLevel global keeps track of when we're inside a list.
         // Each time we enter a list, we increment it; when we leave a list,
         // we decrement. If it's zero, we're not in a list anymore.
@@ -1147,10 +1148,10 @@ public struct Markdown {
         // change the syntax rules such that sub-lists must start with a
         // starting cardinal number; e.g. "1." or "a.".
 
-        ++_listLevel
+        _listLevel += 1
 
         // Trim trailing blank lines:
-        list = Regex.replace(list, pattern: "\\n{2,}\\z", replacement: "\n")
+        var list = Regex.replace(list, pattern: "\\n{2,}\\z", replacement: "\n")
 
         let pattern = [
             "(^\\p{Z}*)                    # leading whitespace = $1",
@@ -1191,7 +1192,7 @@ public struct Markdown {
             evaluator: listItemEvaluator,
             options: RegexOptions.IgnorePatternWhitespace.union(RegexOptions.Multiline))
 
-        --_listLevel
+        _listLevel -= 1
         return list
     }
 
@@ -1208,8 +1209,8 @@ public struct Markdown {
         options: RegexOptions.Multiline.union(RegexOptions.IgnorePatternWhitespace))
 
     /// Turn Markdown 4-space indented code into HTML pre code blocks
-    private func doCodeBlocks(var text: String) -> String {
-        text = Markdown._codeBlock.replace(text) { self.codeBlockEvaluator($0) }
+    private func doCodeBlocks(text: String) -> String {
+        let text = Markdown._codeBlock.replace(text) { self.codeBlockEvaluator($0) }
         return text
     }
 
@@ -1281,8 +1282,9 @@ public struct Markdown {
         options: RegexOptions.Singleline)
 
     /// Turn Markdown *italics* and **bold** into HTML strong and em tags
-    private func doItalicsAndBold(var text: String) -> String {
+    private func doItalicsAndBold(text: String) -> String {
         // <strong> must go first, then <em>
+        var text = text
         if (_strictBoldItalic) {
             text = Markdown._strictBold.replace(text, "$1<strong>$3</strong>")
             text = Markdown._strictItalic.replace(text, "$1<em>$3</em>")
@@ -1295,7 +1297,8 @@ public struct Markdown {
     }
 
     /// Turn markdown line breaks (two space at end of line) into HTML break tags
-    private func doHardBreaks(var text: String) -> String {
+    private func doHardBreaks(text: String) -> String {
+        var text = text
         if (_autoNewlines) {
             text = Regex.replace(text, pattern: "\\n", replacement: "<br\(_emptyElementSuffix)\n")
         }
@@ -1392,11 +1395,11 @@ public struct Markdown {
                     level = 1
                 }
                 else {
-                    level++
+                    level += 1
                 }
             }
             else {
-                level--
+                level -= 1
             }
         }
         var tail: NSString = ""
@@ -1419,8 +1422,9 @@ public struct Markdown {
     /// Turn angle-delimited URLs into HTML anchor tags
     ///
     /// &lt;http://www.example.com&gt;
-    private func doAutoLinks(var text: String) -> String {
+    private func doAutoLinks(text: String) -> String {
 
+        var text = text
         if (_autoHyperlink) {
             // fixup arbitrary URLs by adding Markdown < > so they get linked as well
             // note that at this point, all other URL in the text are already hyperlinked as <a href=""></a>
@@ -1544,8 +1548,8 @@ public struct Markdown {
     private static let _angles = Regex("<(?![A-Za-z/?\\$!])")
 
     /// Encode any ampersands (that aren't part of an HTML entity) and left or right angle brackets
-    private func encodeAmpsAndAngles(var s: String) -> String {
-        s = Markdown._amps.replace(s, "&amp;")
+    private func encodeAmpsAndAngles(s: String) -> String {
+        var s = Markdown._amps.replace(s, "&amp;")
         s = Markdown._angles.replace(s, "&lt;")
         return s
     }
@@ -1710,11 +1714,12 @@ public struct Markdown {
         return !(NSNotFound == range.location)
     }
 
-    private static func trimEnd(var string: NSString, _ suffix: NSString) -> String {
-        while string.hasSuffix(suffix as String) {
-            string = string.substringToIndex(string.length - suffix.length)
+    private static func trimEnd(string: NSString, _ suffix: NSString) -> String {
+        var s = string
+        while s.hasSuffix(suffix as String) {
+            s = s.substringToIndex(s.length - suffix.length)
         }
-        return string as String
+        return s as String
     }
 
     private static func isNilOrEmpty(s: String?) -> Bool {
