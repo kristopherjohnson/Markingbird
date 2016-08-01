@@ -1,10 +1,13 @@
 Pod::Spec.new do |s|
   s.name             = "Markingbird"
   s.version          = "1.13.5"
-  s.summary          = "Markdown Pod Based on S.O"
+  s.summary          = "Markdown processor written in Swift"
+
   s.description      = <<-DESC
- Markdown parsing
-DESC
+Markdown parsing
+This library provides a Markdown processor written in Swift for OS X and iOS. It is a translation/port of the MarkdownSharp processor used by Stack Overflow.
+  DESC
+
   s.homepage         = "https://github.com/kristopherjohnson/Markingbird"
   s.license          = 'MIT'
   s.author           = { "Kristopher Johnson" => "@OldManKris" }
