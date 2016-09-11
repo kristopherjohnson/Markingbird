@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7AA8CE4F1D7BB03C00319FC8"
-               BuildableName = "Markingbird-iOS.framework"
+               BuildableName = "Markingbird.framework"
                BlueprintName = "Markingbird-iOS"
                ReferencedContainer = "container:Markingbird.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7AA8CE4F1D7BB03C00319FC8"
-            BuildableName = "Markingbird-iOS.framework"
+            BuildableName = "Markingbird.framework"
             BlueprintName = "Markingbird-iOS"
             ReferencedContainer = "container:Markingbird.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7AA8CE4F1D7BB03C00319FC8"
-            BuildableName = "Markingbird-iOS.framework"
+            BuildableName = "Markingbird.framework"
             BlueprintName = "Markingbird-iOS"
             ReferencedContainer = "container:Markingbird.xcodeproj">
          </BuildableReference>

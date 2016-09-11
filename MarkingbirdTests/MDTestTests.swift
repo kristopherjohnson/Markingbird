@@ -49,7 +49,7 @@ class MDTestTests: XCTestCase {
         
         let folderContents: [AnyObject]?
         do {
-            folderContents = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(folderURL.path!)
+            folderContents = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(folderURL!.path!)
         } catch {
             XCTAssertNil(error)
             folderContents = nil
@@ -63,21 +63,21 @@ class MDTestTests: XCTestCase {
                     // Load the expected result content
                     let expectedName = filename
                     
-                    let expectedURL = folderURL.URLByAppendingPathComponent(expectedName)
+                    let expectedURL = folderURL!.URLByAppendingPathComponent(expectedName)
                     let expectedContent: String?
                     do {
-                        expectedContent = try String(contentsOfURL: expectedURL, encoding: NSUTF8StringEncoding)
+                        expectedContent = try String(contentsOfURL: expectedURL!, encoding: NSUTF8StringEncoding)
                     } catch {
                         XCTAssertNil(error)
                         expectedContent = nil
                     }
                     
                     // Load the source content
-                    let actualName = NSURL(string: expectedName)!.URLByDeletingPathExtension?.URLByAppendingPathExtension("text").path
-                    let sourceURL = folderURL.URLByAppendingPathComponent(actualName!)
+                    let actualName = NSURL(string: expectedName)!.URLByDeletingPathExtension?.URLByAppendingPathExtension("text")!.path
+                    let sourceURL = folderURL!.URLByAppendingPathComponent(actualName!)
                     let sourceContent: String?
                     do {
-                        sourceContent = try String(contentsOfURL: sourceURL, encoding: NSUTF8StringEncoding)
+                        sourceContent = try String(contentsOfURL: sourceURL!, encoding: NSUTF8StringEncoding)
                     } catch {
                         XCTAssertNil(error)
                         sourceContent = nil
