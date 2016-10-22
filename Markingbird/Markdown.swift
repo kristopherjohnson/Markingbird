@@ -664,7 +664,7 @@ public struct Markdown {
     }
 
     fileprivate mutating func htmlEvaluator(_ match: Match) -> String {
-        let text: String = match.valueOfGroupAtIndex(1) as String ?? ""
+        let text: String = match.valueOfGroupAtIndex(1) as String 
         let key = Markdown.getHashKey(text, isHtmlBlock: true)
         _htmlBlocks[key] = text
 
@@ -1110,18 +1110,24 @@ public struct Markdown {
     }
 
     fileprivate mutating func getListEvaluator(_ isInsideParagraphlessListItem: Bool = false) -> MatchEvaluator {
-        return { match in
+        var selfCopy = self
+        
+        let matchEvaluator: MatchEvaluator = { match in
             let list = match.valueOfGroupAtIndex(1) as String
             let listType = Regex.isMatch(match.valueOfGroupAtIndex(3) as String, pattern: Markdown._markerUL) ? "ul" : "ol"
             var result: String
-
-            result = self.processListItems(list,
-                marker: listType == "ul" ? Markdown._markerUL : Markdown._markerOL,
-                isInsideParagraphlessListItem: isInsideParagraphlessListItem)
-
+            
+            result = selfCopy.processListItems(list,
+                                               marker: listType == "ul" ? Markdown._markerUL : Markdown._markerOL,
+                                               isInsideParagraphlessListItem: isInsideParagraphlessListItem)
+            
             result = "<\(listType)>\n\(result)</\(listType)>\n"
             return result
         }
+        
+        self = selfCopy
+        
+        return matchEvaluator
     }
 
     /// Process the contents of a single ordered or unordered list, splitting it
@@ -1162,6 +1168,7 @@ public struct Markdown {
             ].joined(separator: "\n")
 
         var lastItemHadADoubleNewline = false
+        var selfCopy = self
 
         // has to be a closure, so subsequent invocations can share the bool
         let listItemEvaluator: MatchEvaluator = { match in
@@ -1172,20 +1179,22 @@ public struct Markdown {
 
             if containsDoubleNewline || lastItemHadADoubleNewline {
                 // we could correct any bad indentation here..
-                item = self.runBlockGamut(self.outdent(item as String) + "\n", unhash: false) as NSString
+                item = selfCopy.runBlockGamut(selfCopy.outdent(item as String) + "\n", unhash: false) as NSString
             }
             else {
                 // recursion for sub-lists
-                item = self.doLists(self.outdent(item as String), isInsideParagraphlessListItem: true) as NSString
+                item = selfCopy.doLists(selfCopy.outdent(item as String), isInsideParagraphlessListItem: true) as NSString
                 item = Markdown.trimEnd(item, "\n") as NSString
                 if (!isInsideParagraphlessListItem) {
                     // only the outer-most item should run this, otherwise it's run multiple times for the inner ones
-                    item = self.runSpanGamut(item as String) as NSString
+                    item = selfCopy.runSpanGamut(item as String) as NSString
                 }
             }
             lastItemHadADoubleNewline = endsWithDoubleNewline
             return "<li>\(item)</li>\n"
         }
+        
+        self = selfCopy
 
         list = Regex.replace(list,
             pattern: pattern,
@@ -1775,12 +1784,12 @@ private struct MarkdownRegex {
     #if MARKINGBIRD_DEBUG
     // These are not used, but can be helpful when debugging
     private var initPattern: NSString
-    private var initOptions: NSRegularExpressionOptions
+    private var initOptions: NSRegularExpression.Options
     #endif
 
     fileprivate init(_ pattern: String, options: NSRegularExpression.Options = NSRegularExpression.Options(rawValue: 0)) {
         #if MARKINGBIRD_DEBUG
-            self.initPattern = pattern
+            self.initPattern = pattern as NSString
             self.initOptions = options
         #endif
 
