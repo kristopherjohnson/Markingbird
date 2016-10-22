@@ -1591,10 +1591,10 @@ public struct Markdown {
     /// escapes Bold [ * ] and Italic [ _ ] characters
     fileprivate func escapeBoldItalic(_ s: String) -> String {
         var str = s as NSString
-        str = str.replacingOccurrences(of: "*",
-            with: Markdown._escapeTable["*"]!)
-        str = str.replacingOccurrences(of: "_",
-            with: Markdown._escapeTable["_"]!)
+        if let escapeStars = Markdown._escapeTable["*"], let escapeUnderscore = Markdown._escapeTable["_"] {
+            str = str.replacingOccurrences(of: "*", with: escapeStars) as NSString
+            str = str.replacingOccurrences(of: "_", with: escapeUnderscore) as NSString
+        }
         return str as String
     }
 
