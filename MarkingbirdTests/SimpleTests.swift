@@ -3,7 +3,7 @@ import XCTest
 
 class SimpleTests: XCTestCase {
     
-    private var m: Markdown!
+    fileprivate var m: Markdown!
     
     override func setUp() {
         // Create a new instance for each test

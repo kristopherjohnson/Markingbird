@@ -83,7 +83,7 @@ class ConfigTest: XCTestCase {
         var markdown = Markdown()
         XCTAssertTrue(markdown.linkEmails)
         XCTAssertEqual("<p><a href=\"&#",
-            (markdown.transform("<aa@bb.com>") as NSString).substringWithRange(NSMakeRange(0, 14)))
+            (markdown.transform("<aa@bb.com>") as NSString).substring(with: NSMakeRange(0, 14)))
         
         markdown.linkEmails = false
         XCTAssertEqual("<p><aa@bb.com></p>\n", markdown.transform("<aa@bb.com>"))
