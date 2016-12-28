@@ -16,6 +16,12 @@
 		4EC0AF3519A90DAC0068A458 /* differences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC0AF3419A90DAC0068A458 /* differences.swift */; };
 		7AA8CE531D7BB03C00319FC8 /* Markingbird-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AA8CE521D7BB03C00319FC8 /* Markingbird-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7AA8CE581D7BB04000319FC8 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD219A213340020CA43 /* Markdown.swift */; };
+		A718D9711E13611500DA012D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718D9701E13611500DA012D /* AppDelegate.swift */; };
+		A718D9731E13611500DA012D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A718D9721E13611500DA012D /* ViewController.swift */; };
+		A718D9761E13611500DA012D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A718D9741E13611500DA012D /* Main.storyboard */; };
+		A718D9781E13611500DA012D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A718D9771E13611500DA012D /* Assets.xcassets */; };
+		A718D97B1E13611500DA012D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A718D9791E13611500DA012D /* LaunchScreen.storyboard */; };
+		A718D9801E13617200DA012D /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF8DD219A213340020CA43 /* Markdown.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +49,13 @@
 		7AA8CE501D7BB03C00319FC8 /* Markingbird.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Markingbird.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AA8CE521D7BB03C00319FC8 /* Markingbird-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Markingbird-iOS.h"; sourceTree = "<group>"; };
 		7AA8CE541D7BB03C00319FC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A718D96E1E13611400DA012D /* Markingbird-iOS-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Markingbird-iOS-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A718D9701E13611500DA012D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A718D9721E13611500DA012D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A718D9751E13611500DA012D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A718D9771E13611500DA012D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A718D97A1E13611500DA012D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A718D97C1E13611500DA012D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +80,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A718D96B1E13611400DA012D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -76,6 +96,7 @@
 				4EAF8DBB19A212F30020CA43 /* Markingbird */,
 				4EAF8DC519A212F30020CA43 /* MarkingbirdTests */,
 				7AA8CE511D7BB03C00319FC8 /* Markingbird-iOS */,
+				A718D96F1E13611500DA012D /* Markingbird-iOS-Demo */,
 				4EAF8DBA19A212F30020CA43 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +107,7 @@
 				4EAF8DB919A212F30020CA43 /* Markingbird.framework */,
 				4EAF8DC419A212F30020CA43 /* MarkingbirdTests.xctest */,
 				7AA8CE501D7BB03C00319FC8 /* Markingbird.framework */,
+				A718D96E1E13611400DA012D /* Markingbird-iOS-Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,6 +158,19 @@
 				7AA8CE541D7BB03C00319FC8 /* Info.plist */,
 			);
 			path = "Markingbird-iOS";
+			sourceTree = "<group>";
+		};
+		A718D96F1E13611500DA012D /* Markingbird-iOS-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				A718D9701E13611500DA012D /* AppDelegate.swift */,
+				A718D9721E13611500DA012D /* ViewController.swift */,
+				A718D9741E13611500DA012D /* Main.storyboard */,
+				A718D9771E13611500DA012D /* Assets.xcassets */,
+				A718D9791E13611500DA012D /* LaunchScreen.storyboard */,
+				A718D97C1E13611500DA012D /* Info.plist */,
+			);
+			path = "Markingbird-iOS-Demo";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +249,23 @@
 			productReference = 7AA8CE501D7BB03C00319FC8 /* Markingbird.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A718D96D1E13611400DA012D /* Markingbird-iOS-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A718D97F1E13611500DA012D /* Build configuration list for PBXNativeTarget "Markingbird-iOS-Demo" */;
+			buildPhases = (
+				A718D96A1E13611400DA012D /* Sources */,
+				A718D96B1E13611400DA012D /* Frameworks */,
+				A718D96C1E13611400DA012D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Markingbird-iOS-Demo";
+			productName = "Markingbird-iOS-Demo";
+			productReference = A718D96E1E13611400DA012D /* Markingbird-iOS-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,7 +273,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kristopher Johnson";
 				TargetAttributes = {
@@ -237,6 +289,10 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
 					};
+					A718D96D1E13611400DA012D = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Manual;
+					};
 				};
 			};
 			buildConfigurationList = 4EAF8DB319A212F30020CA43 /* Build configuration list for PBXProject "Markingbird" */;
@@ -245,6 +301,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 4EAF8DAF19A212F30020CA43;
 			productRefGroup = 4EAF8DBA19A212F30020CA43 /* Products */;
@@ -254,6 +311,7 @@
 				4EAF8DB819A212F30020CA43 /* Markingbird */,
 				4EAF8DC319A212F30020CA43 /* MarkingbirdTests */,
 				7AA8CE4F1D7BB03C00319FC8 /* Markingbird-iOS */,
+				A718D96D1E13611400DA012D /* Markingbird-iOS-Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -278,6 +336,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A718D96C1E13611400DA012D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A718D97B1E13611500DA012D /* LaunchScreen.storyboard in Resources */,
+				A718D9781E13611500DA012D /* Assets.xcassets in Resources */,
+				A718D9761E13611500DA012D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +379,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A718D96A1E13611400DA012D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A718D9731E13611500DA012D /* ViewController.swift in Sources */,
+				A718D9801E13617200DA012D /* Markdown.swift in Sources */,
+				A718D9711E13611500DA012D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -320,6 +398,25 @@
 			targetProxy = 4EAF8DD619A213720020CA43 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A718D9741E13611500DA012D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A718D9751E13611500DA012D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A718D9791E13611500DA012D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A718D97A1E13611500DA012D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4EAF8DCA19A212F30020CA43 /* Debug */ = {
@@ -539,6 +636,48 @@
 			};
 			name = Release;
 		};
+		A718D97D1E13611500DA012D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Markingbird-iOS-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.kristopherjohnson.Markingbird-iOS-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A718D97E1E13611500DA012D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Markingbird-iOS-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.kristopherjohnson.Markingbird-iOS-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -577,6 +716,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A718D97F1E13611500DA012D /* Build configuration list for PBXNativeTarget "Markingbird-iOS-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A718D97D1E13611500DA012D /* Debug */,
+				A718D97E1E13611500DA012D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
