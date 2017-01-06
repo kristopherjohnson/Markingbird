@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PMY-qf-smn">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Markingbird-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Markingbird_iOS_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOC-QK-eig">
+                                <rect key="frame" x="20" y="90.5" width="335" height="265"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Pd6-Fd-Wvs"/>
+                                </connections>
+                            </textView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hyn-b7-3zc">
+                                <rect key="frame" x="20" y="382.5" width="335" height="264.5"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Markdown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojl-7E-hyg">
+                                <rect key="frame" x="158" y="72" width="58.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-e5-Qpm">
+                                <rect key="frame" x="165" y="363.5" width="44.5" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="ojl-7E-hyg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="61c-17-Q6h"/>
+                            <constraint firstItem="fOC-QK-eig" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="9dC-pn-dWK"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Hyn-b7-3zc" secondAttribute="bottom" constant="20" id="KM6-Lg-V3P"/>
+                            <constraint firstItem="Hyn-b7-3zc" firstAttribute="height" secondItem="fOC-QK-eig" secondAttribute="height" id="LTd-7T-nsI"/>
+                            <constraint firstItem="MJd-e5-Qpm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sf9-5a-2o5"/>
+                            <constraint firstAttribute="trailing" secondItem="fOC-QK-eig" secondAttribute="trailing" constant="20" id="U2W-Bt-kDn"/>
+                            <constraint firstItem="ojl-7E-hyg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b6d-YV-wHo"/>
+                            <constraint firstItem="fOC-QK-eig" firstAttribute="top" secondItem="ojl-7E-hyg" secondAttribute="bottom" constant="4" id="chi-k5-Jto"/>
+                            <constraint firstItem="MJd-e5-Qpm" firstAttribute="top" secondItem="fOC-QK-eig" secondAttribute="bottom" constant="8" id="dBL-up-ybk"/>
+                            <constraint firstAttribute="trailing" secondItem="Hyn-b7-3zc" secondAttribute="trailing" constant="20" id="mhT-00-92a"/>
+                            <constraint firstItem="Hyn-b7-3zc" firstAttribute="top" secondItem="MJd-e5-Qpm" secondAttribute="bottom" constant="4" id="nvm-uH-VBx"/>
+                            <constraint firstItem="Hyn-b7-3zc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="yP4-gV-LuN"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="k2v-yF-ywK" appends="YES" id="KsG-C6-HXL"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Markingbird" id="giM-6K-bKw"/>
+                    <connections>
+                        <outlet property="textView" destination="fOC-QK-eig" id="nmX-Lm-aUL"/>
+                        <outlet property="webView" destination="Hyn-b7-3zc" id="ba5-ne-MvS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="k2v-yF-ywK">
+                    <connections>
+                        <action selector="dismissKeyboardWithSender:" destination="BYZ-38-t0r" id="SXL-aC-w8h"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="936.79999999999995" y="778.56071964017997"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jW6-H7-1mX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PMY-qf-smn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="80X-2S-zuV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="e5N-Oy-FVl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xt-ud-QsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="778.56071964017997"/>
+        </scene>
+    </scenes>
+</document>
