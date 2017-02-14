@@ -1613,7 +1613,7 @@ public class Markdown {
                 sb += NSString(format:"%2x", UInt(c)) as String
             }
             else {
-                sb += String(repeating: String(describing: UnicodeScalar(c)), count: 1)
+                sb += String(repeating: String(describing: UnicodeScalar(c)!), count: 1)
             }
         }
 
