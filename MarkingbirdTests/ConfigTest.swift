@@ -12,7 +12,7 @@ class ConfigTest: XCTestCase {
         options.linkEmails = false
         options.strictBoldItalic = true
         
-        var markdown = Markdown(options: options)
+        let markdown = Markdown(options: options)
         XCTAssertEqual(true, markdown.autoHyperlink)
         XCTAssertEqual(true, markdown.autoNewLines)
         XCTAssertEqual(">", markdown.emptyElementSuffix)
@@ -33,7 +33,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testAutoHyperlink() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertFalse(markdown.autoHyperlink);
         XCTAssertEqual("<p>foo http://example.com bar</p>\n",
             markdown.transform("foo http://example.com bar"))
@@ -44,7 +44,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testAutoNewLines() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertFalse(markdown.autoNewLines)
         XCTAssertEqual("<p>Line1\nLine2</p>\n",
             markdown.transform("Line1\nLine2"))
@@ -55,7 +55,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testEmptyElementSuffix() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertEqual(" />", markdown.emptyElementSuffix)
         XCTAssertEqual("<hr />\n",
             markdown.transform("* * *"))
@@ -65,7 +65,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testEncodeProblemUrlCharacters() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertFalse(markdown.encodeProblemUrlCharacters)
         XCTAssertEqual("<p><a href=\"/'*_[]()/\">Foo</a></p>\n",
             markdown.transform("[Foo](/'*_[]()/)"))
@@ -80,7 +80,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testLinkEmails() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertTrue(markdown.linkEmails)
         XCTAssertEqual("<p><a href=\"&#",
             (markdown.transform("<aa@bb.com>") as NSString).substring(with: NSMakeRange(0, 14)))
@@ -90,7 +90,7 @@ class ConfigTest: XCTestCase {
     }
     
     func testStrictBoldItalic() {
-        var markdown = Markdown()
+        let markdown = Markdown()
         XCTAssertFalse(markdown.strictBoldItalic)
         XCTAssertEqual("<p>before<strong>bold</strong>after before<em>italic</em>after</p>\n",
             markdown.transform("before**bold**after before_italic_after"))

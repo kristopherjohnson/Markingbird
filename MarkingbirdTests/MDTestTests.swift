@@ -86,7 +86,7 @@ class MDTestTests: XCTestCase {
                     if sourceContent != nil {
                         // Transform the source into the actual result, and
                         // normalize both the actual and expected results
-                        var m = Markdown()                    
+                        let m = Markdown()                    
                         let actualResult = removeWhitespace(m.transform(sourceContent!))
                         let expectedResult = removeWhitespace(expectedContent!)
                         
