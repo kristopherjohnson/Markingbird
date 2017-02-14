@@ -1581,7 +1581,7 @@ public class Markdown {
 
     /// escapes Bold [ * ] and Italic [ _ ] characters
     fileprivate func escapeBoldItalic(_ s: String) -> String {
-        var str = s as NSString
+        var str = s
         str = str.replacingOccurrences(of: "*",
             with: Markdown._escapeTable["*"]!)
         str = str.replacingOccurrences(of: "_",
