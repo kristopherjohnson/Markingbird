@@ -13,11 +13,11 @@ class MDTestTests: XCTestCase {
             
             // If there is a difference, print it in a more readable way than
             // XCTest does
-            switch firstDifferenceBetweenStrings(test.actualResult, s2: test.expectedResult) {
+            switch firstDifferenceBetweenStrings(test.actualResult as NSString, s2: test.expectedResult as NSString) {
             case .noDifference:
                 break;
             case .differenceAtIndex:
-                let prettyDiff = prettyFirstDifferenceBetweenStrings(test.actualResult, s2: test.expectedResult)
+                let prettyDiff = prettyFirstDifferenceBetweenStrings(test.actualResult as NSString, s2: test.expectedResult as NSString)
                 print("\n====\n\(test.actualName): \(prettyDiff)\n====\n")
             }
             
